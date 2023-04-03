@@ -1,15 +1,14 @@
 <?php
 session_start();
 include_once('PARTIALS/header.php');
-include('./CONFIG/pretydump.php')
 ?>
 
 <section id="home">
 
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid mx-5">
-    <a class="navbar-brand text-light" href="index.php">
-        <img class="logo" src="LOGO/logo.png" alt="Mon logo">
+    <a class="navbar-brand text-light" href="../index.php">
+        <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
     </a>
     <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -17,24 +16,24 @@ include('./CONFIG/pretydump.php')
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-light" aria-current="page" href="#">Home</a>
+          <a class="nav-link text-light mx-2" aria-current="page" href="#"><h5>Home</h5></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Features</a>
+          <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="#">Pricing</a>
+          <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light" href="">Disabled</a>
+          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
         </li>
       </ul>
       <div class="user ms-5">
         <?php
 if (isset($_SESSION["id"])) {
-  echo '<a href="logout.php" class="btn btn-danger">Disconnect</a>';
+  echo '<a href="../PHP/logout.php" class="btn btn-danger">Disconnect</a>';
 } else {
-  echo '<a href="login.php" class="btn btn-primary">Login / Register</a>';
+  echo '<a href="../PHP/login.php" class="btn text-light rounded-0">Login / Register</a>';
 }
 ?>
       </div>

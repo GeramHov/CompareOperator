@@ -14,8 +14,10 @@ ini_set("error_append_string ", "</pre>");
 
 // Autoload logic
 spl_autoload_register(function ($class_name) {
-    include __DIR__ . '/../class/' . $class_name . '.php';
+    include __DIR__ . '/../CLASSES/' . $class_name . '.php';
 });
 
-
+function prettyDump($data){
+    highlight_string("<?php\n\$data =\n" . var_export($data, true) . ";\n?>");
+}
 ?>

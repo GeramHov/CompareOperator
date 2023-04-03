@@ -14,11 +14,34 @@ p {
   height: 130vh;
   background-color: #3AAFA9;
   background-size: cover; }
+  #home h5 {
+    font-weight: 700; }
+    #home h5:hover {
+      transform: scale(1.06);
+      transition: 0.4s ease;
+      color: #DEF2F1; }
+    #home h5:not(:hover) {
+      transform: scale(1);
+      transition: 0.4s ease; }
+  #home .btn {
+    width: 10rem;
+    background-color: #17252A; }
+    #home .btn:hover {
+      background-color: #2B7A78; }
+  #home .card .btn {
+    width: 8rem;
+    background-color: #17252A; }
+  #home .card:hover {
+    transform: scale(1.06);
+    transition: 0.4s ease; }
+  #home .card:not(:hover) {
+    transform: scale(1);
+    transition: 0.4s ease; }
 
 .logo {
   position: relative;
-  width: 6vw;
-  height: 11vh; }
+  width: 4vw;
+  height: 9vh; }
 
 .logo:hover {
   transform: scale(1.06);
@@ -28,15 +51,25 @@ p {
   transform: scale(1);
   transition: 0.4s ease; }
 
-.card .btn {
-  width: 8rem;
-  background-color: #17252A; }
-.card:hover {
-  transform: scale(1.06);
-  transition: 0.4s ease; }
+.gradient-custom-2 {
+  background: #fccb90;
+  background: linear-gradient(to left, #036666, #248277, #469D89, #67B99A); }
+  .gradient-custom-2 .btn {
+    width: 10rem;
+    background-color: #17252A; }
+    .gradient-custom-2 .btn:hover {
+      background-color: #2B7A78; }
 
-.card:not(:hover) {
-  transform: scale(1);
-  transition: 0.4s ease; }
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important; } }
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem; } }
+.log {
+  width: 100%;
+  margin: 0;
+  padding: 0; }
 
 /*# sourceMappingURL=style.css.map */

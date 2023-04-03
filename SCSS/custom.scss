@@ -29,7 +29,6 @@ body{
 
 }
 
-
 p{
     font-family: $slab;
 }
@@ -40,12 +39,51 @@ p{
     height: 130vh;
     background-color: $green;
     background-size: cover;
+    
+    h5{
+        font-weight: 700;
+    
+        &:hover{
+            @include hoverAnimationIn;
+            color: $light;
+        }
+    
+        &:not(:hover){
+            @include hoverAnimationOut;
+        }
+    }
+    
+    .btn{
+        width: 10rem;
+        background-color: $black; 
+    
+        &:hover{
+            background-color: $darkgreen;
+        }
+    
+    }
+
+    .card{
+    
+        .btn{
+            width: 8rem;
+            background-color: $black;
+        }
+    
+        &:hover{
+            @include hoverAnimationIn;
+        }
+
+        &:not(:hover){
+            @include hoverAnimationOut;
+        }
+    }
 }
 
 .logo {
     position: relative;
-    width: 6vw;
-    height: 11vh;
+    width: 4vw;
+    height: 9vh;
 }
 
 .logo:hover {
@@ -56,19 +94,38 @@ p{
     @include hoverAnimationOut;
 }
 
-.card{
+
+
+.gradient-custom-2 {
+    background: #fccb90;
+    background: linear-gradient(to left, #036666, #248277, #469D89, #67B99A);
 
     .btn{
-        width: 8rem;
-        background-color: $black;
-    }
-
-    &:hover{
-        @include hoverAnimationIn;
+        width: 10rem;
+        background-color: $black; 
+    
+        &:hover{
+            background-color: $darkgreen;
+        }
+    
     }
 }
 
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
 
-.card:not(:hover) {
-    @include hoverAnimationOut;
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+
+.log {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
