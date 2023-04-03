@@ -12,7 +12,8 @@ p {
 #home {
   width: 100%;
   height: 130vh;
-  background-color: #3AAFA9;
+  background: #2b7a78;
+  background: linear-gradient(90deg, #2b7a78 20%, #3aafa9 47%, #2b7a78 82%);
   background-size: cover; }
   #home h5 {
     font-weight: 700; }
@@ -23,14 +24,21 @@ p {
     #home h5:not(:hover) {
       transform: scale(1);
       transition: 0.4s ease; }
+  #home #login {
+    text-decoration: none;
+    color: #FEFFFF; }
+    #home #login:hover {
+      text-decoration: underline; }
   #home .btn {
-    width: 10rem;
+    width: 5rem;
     background-color: #17252A; }
     #home .btn:hover {
-      background-color: #2B7A78; }
+      background-color: #3AAFA9; }
   #home .card .btn {
     width: 8rem;
     background-color: #17252A; }
+    #home .card .btn:hover {
+      background-color: #3AAFA9; }
   #home .card:hover {
     transform: scale(1.06);
     transition: 0.4s ease; }
@@ -53,12 +61,18 @@ p {
 
 .gradient-custom-2 {
   background: #fccb90;
-  background: linear-gradient(to left, #036666, #248277, #469D89, #67B99A); }
+  background: linear-gradient(to left, #036666, #248277, #469D89, #67B99A);
+  background-size: cover; }
   .gradient-custom-2 .btn {
     width: 10rem;
     background-color: #17252A; }
     .gradient-custom-2 .btn:hover {
       background-color: #2B7A78; }
+  .gradient-custom-2 #login {
+    text-decoration: none;
+    color: #FEFFFF; }
+    .gradient-custom-2 #login:hover {
+      text-decoration: underline; }
 
 @media (min-width: 768px) {
   .gradient-form {

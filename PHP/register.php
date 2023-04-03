@@ -1,59 +1,38 @@
 <?php
-session_start();
-include "../CONFIG/db.php";
-$erreur = "";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	$nom = $_POST['nom'] ?? '';
-	$prenom = $_POST['prenom'] ?? '';
-	$email = $_POST['email'] ?? '';
-	$pseudo = $_POST['pseudo'] ?? '';
-	$password = $_POST['password'] ?? '';
-	$passwordConf = $_POST['passconf'] ?? '';
-
-	$erreur = "";
-	if (empty($nom)) {
-		$erreur = "Le champ nom est obligatoire!";
-	} elseif (empty($prenom)) {
-		$erreur = "Le champ prénom est obligatoire!";
-	} elseif (empty($email)) {
-		$erreur = "Le champ email est obligatoire!";
-	} elseif (empty($pseudo)) {
-		$erreur = "Le champ Pseudo est obligatoire!";
-	} elseif (empty($password)) {
-		$erreur = "Le champ mot de passe est obligatoire!";
-	} elseif ($password != $passwordConf) {
-		$erreur = "Mots de passe différents!";
-	} else {
-		$verify_email = $db->prepare("select id from users where email=? limit 1");
-		$verify_email->execute(array($email));
-		$user_email = $verify_email->fetchAll();
-		if (count($user_email) > 0) {
-			$erreur = "Email existe déjà!";
-		} else {
-			$ins = $db->prepare("insert into users(nom,prenom,email,pseudo,password) values(?,?,?,?,?)");
-			if ($ins->execute(array($nom, $prenom, $email, $pseudo, md5($password)))) {
-				header("location:index.php");
-			}
-		}
-	}
-}
+	session_start();
 ?>
-<!doctype html>
-<html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Register</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-	<section class="vh-100 gradient-custom-2">
-		<div class="container py-5 h-100">
+<?php
+	include_once('../PARTIALS/header.php')
+?>
+<section class="vh-100 gradient-custom-2">
+<nav class="navbar navbar-expand-lg p-0">
+  <div class="container-fluid mx-5">
+    <a class="navbar-brand text-light" href="../index.php">
+        <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
+    </a>
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" aria-current="page" href="#"><h5>Home</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+		<div class="container pb-5 h-75 pt-3">
 			<div class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-lg-10 col-xl-9">
 					<div class="card rounded-3" style="box-shadow: 0 0 0 transparent;">
@@ -61,46 +40,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 							<div class="col-lg-6 d-flex align-items-center">
 								<div class="card-body p-4 p-lg-5 text-black">
 									<div class="text-center">
-										<img src="./LOGO/logo.png" class="pb-2" style="width: 50%;" alt="logo">
-										<h4 class="mt-1 mb-5 pb-1">We are The Compar Team</h4>
+										<img src="../LOGO/logo.png" class="pb-2" style="width: 30%;" alt="logo">
+										<h4 class="mt-1 mb-5 pb-1">We are The Compare Team</h4>
 									</div>
 
-									<div class="erreur">
-										<?php echo $erreur ?>
+									<div class="erreur text-danger">
+										<p>
+											<?php 
+											if(isset($_SESSION['error'])){
+												echo $_SESSION['error']; 
+											}
+											?>
+										</p>
 									</div>
 
-									<form name="fo" method="post" action="">
+									<form method="post" action="../PROCESS/signup.php">
 
 										<div class="form-outline mb-2">
 											<input type="email" id="email" class="form-control" value=""
-												placeholder="Email Address" name="email" />
+												placeholder="Email Address" name="email" required/>
 										</div>
 
 										<div class="form-outline mb-2">
-											<input type="text" id="nom" class="form-control" placeholder="Name"
-												name="nom" />
+											<input type="text" id="nom" class="form-control" placeholder="Firstname"
+												name="firstname" required />
 										</div>
 										<div class="form-outline mb-2">
-											<input type="text" id="prenom" class="form-control" placeholder="Firstname"
-												name="prenom" />
+											<input type="text" id="prenom" class="form-control" placeholder="Lastname"
+												name="lastname" required/>
 										</div>
-										<div class="form-outline mb-2">
-											<input type="text" id="pseudo" class="form-control" placeholder="Username"
-												name="pseudo" value="" />
-										</div>
-
 										<div class="form-outline mb-2">
 											<input type="password" id="form2Example22" class="form-control"
-												placeholder="Password" name="password" />
+												placeholder="Password" name="password" required/>
 										</div>
 										<div class="form-outline mb-2">
 											<input type="password" id="passconf" class="form-control"
-												placeholder="Password Verification" name="passconf" />
+												placeholder="Confirm Password" name="passconfirm" required />
 										</div>
 										<div class="text-center pt-1 mb-5 pb-1">
 											<button
-												class="log btn text-light btn-block fa-lg gradient-custom-2 mb-3 pb-1 pt-1"
-												type="submit" name="save" value="Save" style="outline: none;">Sign
+												class="log btn text-light btn-block fa-lg gradient-custom-2 mb-3 pb-1 pt-1 rounded-0"
+												type="submit" value="Save" style="outline: none;">Sign
 												Up</button>
 											<br>
 											<a class="text-muted" href="#">Forgot password?</a>
@@ -108,8 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 										<div class="d-flex align-items-center justify-content-center pb-4">
 											<p class="mb-0 me-2">Already Signed up?</p>
-											<a href="./register.php" class="btn btn-outline-danger">Log into your
-												account</a>
+											<a href="../PHP/login.php" class="btn text-light rounded-0">Log In</a>
 										</div>
 									</form>
 								</div>
@@ -132,5 +111,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			</div>
 		</div>
 	</section>
+<?php
+	include_once('../PARTIALS/bottom.php');
+?>
 
 </body>

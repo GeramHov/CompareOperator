@@ -6,28 +6,24 @@ $erreur = "";
 if (isset($_POST["login"])) {
      $email = $_POST["email"];
      $password = $_POST["password"];
-     $pass_crypt = md5($password); // cryptage du mot de passe avec md5
+     $pass_crypt = md5($password); // DECRYPT USER PASSWORD
 
-     $verify = $db->prepare("select * from users where email=? and password=? limit 1");
+     $verify = $db->prepare("SELECT * FROM users WHERE email=? AND password=? limit 1");
      $verify->execute(array($email, $pass_crypt));
      $user = $verify->fetch(PDO::FETCH_ASSOC);
      if ($user) {
-          $_SESSION["prenom_nom"] = ucfirst(strtolower($user["prenom"])) .
-               " " . strtoupper($user["nom"]);
-          $_SESSION["connecter"] = "yes";
+
+          $_SESSION["firstname"] = ucfirst(strtolower($user["firstname"]));
+          $_SESSION["lastname"] = ucfirst(strtolower($user["lastname"]));
           $_SESSION["id"] = $user["id"];
           $_SESSION["email"] = $user["email"];
-          $_SESSION["admin"] = $user["admin"];
-          $_SESSION["pseudo"] = $user["pseudo"];
-          $_SESSION["nom"] = $user["nom"];
-          $_SESSION["prenom"] = $user["prenom"];
-          header("location:index.php");
-          exit; // arrêter l'exécution du script après la redirection
+
+          header("location: ../index.php");
+          exit; // STOP EXECUTION WHEN REDIRECTED
      } else {
-          $erreur = "Mauvais login ou mot de passe!";
+          $erreur = "Login or password incorrect!";
      }
 }
-
 ?>
 
 <?php
@@ -35,7 +31,7 @@ if (isset($_POST["login"])) {
 ?>
      <section class="gradient-custom-2">
 
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg p-0">
   <div class="container-fluid mx-5">
     <a class="navbar-brand text-light" href="../index.php">
         <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
@@ -58,15 +54,6 @@ if (isset($_POST["login"])) {
           <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
         </li>
       </ul>
-      <div class="user ms-5">
-        <?php
-if (isset($_SESSION["id"])) {
-  echo '<a href="../PHP/logout.php" class="btn btn-danger">Disconnect</a>';
-} else {
-  echo '<a href="../PHP/login.php" class="btn text-light rounded-0">Login / Register</a>';
-}
-?>
-      </div>
     </div>
   </div>
 </nav>
