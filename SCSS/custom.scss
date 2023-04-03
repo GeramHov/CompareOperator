@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+$black : #17252A;
+$darkgreen : #2B7A78;
+$green : #3AAFA9;
+$light: #DEF2F1;
+$white: #FEFFFF;
+$roboto : 'Roboto', sans-serif;
+$slab : 'Roboto Slab', serif;
+
+@mixin hoverAnimationIn {
+    transform: scale(1.06);
+    transition: 0.4s ease;
+}
+
+@mixin hoverAnimationOut{
+    transform: scale(1.0);
+    transition: 0.4s ease; 
+}
+
+body{
+    font-family: $roboto;
+    overflow-x: hidden;
+
+    h1,h2,h3,h4,h5,h6{
+        font-family: $roboto;
+    }
+
+}
+
+
+p{
+    font-family: $slab;
+}
+
+
+#home{
+    width: 100%;
+    height: 130vh;
+    background-color: $green;
+    background-size: cover;
+}
+
+.logo {
+    position: relative;
+    width: 6vw;
+    height: 11vh;
+}
+
+.logo:hover {
+    @include hoverAnimationIn;
+}
+
+.logo:not(:hover){
+    @include hoverAnimationOut;
+}
+
+.card{
+
+    .btn{
+        width: 8rem;
+        background-color: $black;
+    }
+
+    &:hover{
+        @include hoverAnimationIn;
+    }
+}
+
+
+.card:not(:hover) {
+    @include hoverAnimationOut;
+}
