@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-light mx-2" aria-current="page" href="#"><h5>Home</h5></a>
+          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
@@ -49,6 +49,7 @@
 											<?php 
 											if(isset($_SESSION['error'])){
 												echo $_SESSION['error']; 
+												session_unset();
 											}
 											?>
 										</p>
@@ -76,6 +77,14 @@
 										<div class="form-outline mb-2">
 											<input type="password" id="passconf" class="form-control"
 												placeholder="Confirm Password" name="passconfirm" required />
+										</div>
+										<div class="text-danger">
+										<?php 
+										if(isset($_SESSION['message'])){
+											echo $_SESSION['message'];
+											session_unset();
+										}
+										 ?>
 										</div>
 										<div class="text-center pt-1 mb-5 pb-1">
 											<button

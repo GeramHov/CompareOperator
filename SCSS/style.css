@@ -50,14 +50,12 @@ p {
   position: relative;
   width: 4vw;
   height: 9vh; }
-
-.logo:hover {
-  transform: scale(1.06);
-  transition: 0.4s ease; }
-
-.logo:not(:hover) {
-  transform: scale(1);
-  transition: 0.4s ease; }
+  .logo:hover {
+    transform: scale(1.06);
+    transition: 0.4s ease; }
+  .logo:not(:hover) {
+    transform: scale(1);
+    transition: 0.4s ease; }
 
 .gradient-custom-2 {
   background: #fccb90;
@@ -85,5 +83,35 @@ p {
   width: 100%;
   margin: 0;
   padding: 0; }
+
+.logo-hover {
+  transform: rotate(200deg);
+  width: 5vh;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: -8;
+  display: contents;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 1;
+  animation-name: shooting-star;
+  animation-duration: 1s;
+  animation-fill-mode: forwards; }
+
+@keyframes shooting-star {
+  0% {
+    transform: translate(-100%, -100%);
+    opacity: 1; }
+  10% {
+    transform: translate(0, 0);
+    opacity: 1; }
+  90% {
+    transform: translate(100%, 150%);
+    opacity: 1; }
+  100% {
+    transform: translate(500%, 200%);
+    opacity: 0;
+    transform: rotate(20deg); } }
 
 /*# sourceMappingURL=style.css.map */

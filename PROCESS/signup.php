@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		$emailCheck->execute(array($email));
 		$userEmail = $emailCheck->fetchAll();
 
-			if (count($userEmail) > 0) {
+			if (count($userEmail) > 0 ) {
                 header ("Location: ../PHP/register.php");
 				$_SESSION['error'] = "E-mail exists already!";
 			} else {
@@ -25,6 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 					header("location: ../index.php");
 				}
 			}
+	} else {
+		header("location: ../PHP/register.php");
+		echo $_SESSION['message'] = 'Password must be the same!';
 	}
 
 	}

@@ -1,29 +1,6 @@
 <?php
 session_start();
-include_once "../CONFIG/db.php";
 
-$erreur = "";
-if (isset($_POST["login"])) {
-     $email = $_POST["email"];
-     $password = $_POST["password"];
-     $pass_crypt = md5($password); // DECRYPT USER PASSWORD
-
-     $verify = $db->prepare("SELECT * FROM users WHERE email=? AND password=? limit 1");
-     $verify->execute(array($email, $pass_crypt));
-     $user = $verify->fetch(PDO::FETCH_ASSOC);
-     if ($user) {
-
-          $_SESSION["firstname"] = ucfirst(strtolower($user["firstname"]));
-          $_SESSION["lastname"] = ucfirst(strtolower($user["lastname"]));
-          $_SESSION["id"] = $user["id"];
-          $_SESSION["email"] = $user["email"];
-
-          header("location: ../index.php");
-          exit; // STOP EXECUTION WHEN REDIRECTED
-     } else {
-          $erreur = "Login or password incorrect!";
-     }
-}
 ?>
 
 <?php
@@ -42,7 +19,7 @@ if (isset($_POST["login"])) {
     <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link text-light mx-2" aria-current="page" href="#"><h5>Home</h5></a>
+          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
@@ -71,11 +48,16 @@ if (isset($_POST["login"])) {
                                                   <h4 class="mt-1 mb-5 pb-1">We are The Compare Team</h4>
                                              </div>
 
-                                             <div class="erreur">
-                                                  <?php echo $erreur ?>
+                                             <div class="erreur text-danger">
+                                                  <?php 
+                                                  if(isset($_SESSION['error'])){
+                                                       echo $_SESSION['error'];
+                                                       session_unset();
+                                                  }
+                                                   ?>
                                              </div>
 
-                                             <form method="post" action="">
+                                             <form method="post" action="../PROCESS/login.php">
                                                   <p>Please login to your account</p>
 
                                                   <div class="form-outline mb-4">
