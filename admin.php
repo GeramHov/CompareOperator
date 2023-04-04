@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start(); ?>
+<?php session_start(); 
+if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
+    header("Location: ./index.php");
+    exit();
+}
+?>
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -103,7 +108,8 @@
 
                         <div class="sb-sidenav-footer fixed-bottom">
                             <div class="small">Logged in as:</div>
-                            <?php $_SESSION["firstname"]; ?>
+                             <?php
+                            echo $_SESSION["firstname"]; ?>
                         </div>
             </nav>
         </div>

@@ -11,7 +11,21 @@ class Manager
     }
 
 
-    public function getDestinationsFromDb(Destinations $destinations)
+    public function getAllDestinations()
+    {
+        $sql = "SELECT * FROM destinations";
+        $statement = $this->db->query($sql);
+
+        $destinations = [];
+        $allDestinations = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allDestinations as $destination) {
+            $destinations[] = new Destination($destination);
+        }
+
+        return $destinations;
+    }
+
+    public function getDestinationsFromDb(Destination $destinations)
     {
         $query = $this->db->prepare("SELECT * FROM destinations WHERE id=:id");
         $query->bindValue(":id", $destinations->getId(), PDO::PARAM_INT);
@@ -19,7 +33,7 @@ class Manager
         $ArrayDestinations = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($ArrayDestinations as $data) {
-                $object = new Destinations($data);
+                $object = new Destination($data);
                 $destinations->setLocation($object);
             }
     }

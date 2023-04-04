@@ -45,6 +45,12 @@ p {
   #home .card:not(:hover) {
     transform: scale(1);
     transition: 0.4s ease; }
+  #home .searchinput {
+    border: 1px solid #3AAFA9;
+    height: 4vh;
+    display: none; }
+  #home .searchinputbtn {
+    display: none; }
 
 .logo {
   position: relative;
