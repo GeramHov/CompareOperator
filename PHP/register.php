@@ -92,7 +92,7 @@
 												type="submit" value="Save" style="outline: none;">Sign
 												Up</button>
 											<br>
-											<a class="text-muted" href="#">Forgot password?</a>
+											<a class="text-muted" href="../pass_reset.php">Forgot password?</a>
 										</div>
 
 										<div class="d-flex align-items-center justify-content-center pb-4">

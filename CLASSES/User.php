@@ -1,38 +1,30 @@
 <?php
 
-class User {
-    private $name;
+class User
+{
     private $id;
     private $firstname;
     private $lastname;
     private $email;
+    private $admin;
 
-   public function __construct($data)
+    public function __construct($data)
     {
-        $this->hydrate($data); 
+        $this->hydrate($data);
     }
 
-    public function hydrate(array $data) {
-        $this->setName($data['name']);
+    public function hydrate(array $data)
+    {
         $this->setId($data['id']);
         $this->setFirstName($data['firstname']);
         $this->setLastName($data['lastname']);
         $this->setEmail($data['email']);
+        $this->setAdmin($data['admin']);
     }
 
 
-    public function getName() {
-        return $this->name;
-    }
-
-    public function setName($name)
+    public function getId()
     {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getId() {
         return $this->id;
     }
 
@@ -43,7 +35,8 @@ class User {
         return $this;
     }
 
-    public function getFirstName() {
+    public function getFirstName()
+    {
         return $this->firstname;
     }
 
@@ -54,7 +47,8 @@ class User {
         return $this;
     }
 
-    public function getLastName() {
+    public function getLastName()
+    {
         return $this->lastname;
     }
 
@@ -65,7 +59,8 @@ class User {
         return $this;
     }
 
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
@@ -75,6 +70,16 @@ class User {
 
         return $this;
     }
+    public function getAdmin()
+    {
+        return $this->admin;
+    }
 
-    
+    public function setAdmin($admin)
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
 }

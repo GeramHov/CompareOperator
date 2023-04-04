@@ -3,8 +3,8 @@
     include_once('./PARTIALS/header.php');
 ?>
 
-    <section style="background-color: #eee;">
-    <nav class="navbar navbar-expand-lg">
+<section id="profile">
+<nav class="navbar navbar-expand-lg">
   <div class="container-fluid mx-5">
     <a class="navbar-brand text-dark" href="../index.php">
         <img class="logo" src="../LOGO/logo.png" alt="Logo">
@@ -32,9 +32,7 @@
     </div>
   </div>
 </nav>
-    <div class="container">
-
-
+<div class="container">
             <div class="row vh-100">
                 <div class="col-lg-4">
                     <div class="card mb-4">
@@ -48,8 +46,8 @@
                             <p class="text-muted mb-4">Lorem ipsum dolor sit
                             </p>
                             <div class="d-flex justify-content-center mb-2">
-                                <button type="button" class="btn btn-primary">Bouton</button>
-                                <button type="button" class="btn btn-outline-primary ms-1">Message</button>
+                                <button type="button" class="btn text-light rounded-0">Bouton</button>
+                                <button type="button" class="btn text-light rounded-0 ms-2">Message</button>
                             </div>
                         </div>
                     </div>

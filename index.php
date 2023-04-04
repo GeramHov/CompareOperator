@@ -26,15 +26,19 @@ include_once('PARTIALS/header.php');
           <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
-        </li>
-        <?php
-        if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
-        echo '<li class="nav-item">
-                <a class="nav-link text-danger ms-2 me-5" href="../admin.php">Admin Pannel</a>
+            <a class="nav-link text-light ms-2" href="">
+              <h5>Disabled</h5>
+            </a>
+          </li>
+          <?php
+          if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+            echo '<li class="nav-item">
+                <a class="nav-link text-light mx-2 me-5" href="../admin.php">
+                <h5>Admin Panel</h5>
+                </a>
               </li>';
-    }
-    ?>
+          }
+          ?>
         <li>
           <div class="user ms-5">
             <?php
