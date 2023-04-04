@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start(); 
+<?php session_start();
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
     header("Location: ./index.php");
     exit();
 }
 ?>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -48,7 +49,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Core</div>
-                        <a class="nav-link" href="index.html">
+                        <a class="nav-link" href="index.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard
                         </a>
@@ -108,7 +109,7 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
 
                         <div class="sb-sidenav-footer fixed-bottom">
                             <div class="small">Logged in as:</div>
-                             <?php
+                            <?php
                             echo $_SESSION["firstname"]; ?>
                         </div>
             </nav>
@@ -171,9 +172,9 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
                                         <th>Name</th>
                                         <th>Firstname</th>
                                         <th>Email</th>
-                                        <th>Undefined</th>
-                                        <th>Undefined</th>
-                                        <th>Undefined</th>
+                                        <th>Created At</th>
+                                        <th>Last Activity</th>
+                                        <th>Tools</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -181,9 +182,9 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
                                         <th>Name</th>
                                         <th>Firstname</th>
                                         <th>Email</th>
-                                        <th>Undefined</th>
-                                        <th>Undefined date</th>
-                                        <th>Undefined</th>
+                                        <th>Created At</th>
+                                        <th>Last Activity</th>
+                                        <th>Tools</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -201,16 +202,46 @@ if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== 1) {
                                         // Ajouter l'objet User créé au tableau $users
                                         $users[] = $user;
                                     }
-                                    $clear = "Données test";
+                                    $clear = "";
                                     foreach ($users as $user) {
                                         echo "<tr>";
                                         echo "<td>" . $user->getLastName() . "</td>";
                                         echo "<td>" . $user->getFirstName() . "</td>";
                                         echo "<td>" . $user->getEmail() . "</td>";
-                                        echo "<td>" . $clear . "</td>";
-                                        echo "<td>" . $clear . "</td>";
-                                        echo "<td>" . $clear . "</td>";
+                                        echo "<td>" . $user->getCreated_at();
+                                        if ($user->getBanned() == 1) {
+                                            echo '<i class="fa-solid fa-ban px-2" style="color: #6f0003;"></i>'; // afficher l'icône de marteau si l'user est ban
+                                        }
+                                        echo "</td>";
+                                        echo "<td>" . $user->getLast_connection() . "</td>";
+                                        echo "<td> 
+                                                <form method='POST' action=''>
+                                                    <input type='hidden' name='userId' value='" . $user->getId() . "'>
+                                                    <select name='method' onchange='this.form.submit()'>
+                                                        <option value=''>Selectionnez une methode</option>
+                                                        <option value='method1'>Ban user</option>
+                                                        <option value='method2'>Unban user</option>
+                                                    </select>" . $clear . "
+                                                </form>
+                                            </td>";
+
                                         echo "</tr>";
+                                    }
+                                    if (isset($_POST['method']) && isset($_POST['userId'])) {
+                                        // récupérer la valeur sélectionnée
+                                        $selectedMethod = $_POST['method'];
+                                        $userId = $_POST['userId'];
+                                        // créer une instance de la classe Manager avec la connexion à la base de données
+                                        $manager = new Manager($db);
+
+                                        // vérifier la valeur sélectionnée et appeler la méthode correspondante
+                                        if ($selectedMethod === 'method1') {
+                                            $manager->banUser($userId);
+                                        } elseif ($selectedMethod === 'method2') {
+                                            $manager->unbanUser($userId);
+                                        } else {
+                                            echo "Veuillez sélectionner une méthode.";
+                                        }
                                     }
                                     ?>
 
