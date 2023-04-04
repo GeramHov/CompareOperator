@@ -1,37 +1,39 @@
 <?php
 session_start();
-include_once('PARTIALS/header.php');
-include_once('./CONFIG/db.php');
-include_once('./CONFIG/autoload.php');
 
-// REQUEST A METHOD TO SHOW ALL DESTINATIONS
-$manager = new Manager($db);
-  $destinations = $manager->getAllDestinations();
+include_once('PARTIALS/header.php');
 ?>
 
 <section id="home">
 
-<nav class="navbar navbar-expand-lg">
-  <div class="container-fluid mx-5">
-    <a class="navbar-brand text-light" href="../index.php">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid mx-5">
+      <a class="navbar-brand text-light" href="../index.php">
         <img class="logo" src="../LOGO/logo.png" alt="Logo">
         <img class="logo logo-hover" src="./IMAGES/star.png" alt="Giant rock">
       </a>
-    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
-        </li>
-        <li class="nav-item">
+      <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link text-light mx-2" aria-current="page" href="../index.php">
+              <h5>Home</h5>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light mx-2" href="#">
+              <h5>Features</h5>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light mx-2" href="#">
+              <h5>Pricing</h5>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link text-light ms-2" href="">
               <h5>Disabled</h5>
             </a>
@@ -45,11 +47,11 @@ $manager = new Manager($db);
               </li>';
           }
           ?>
-        <li>
-          <div class="user ms-5">
-            <?php
-if(isset($_SESSION['id'])) {
-    echo '<a href="../profile.php">
+          <li>
+            <div class="user ms-5">
+              <?php
+              if (isset($_SESSION['id'])) {
+                echo '<a href="../profile.php">
             <img class="mt-1" src="../ICONS/profile-user.png" alt="usericon" width="30" height="30" />
           </a>
           <li class="nav-item mt-2">
@@ -62,82 +64,174 @@ if(isset($_SESSION['id'])) {
             </div>
           </li>';
 
-} else {
-    echo '<li class="nav-item ">
+              } else {
+                echo '<li class="nav-item ">
             <a class="nav-link text-light mx-2" href="../PHP/register.php">Sign Up</a>
           </li>
           <li class="nav-item ">
           <a href="../PHP/login.php" class="btn text-light rounded-0">Login</a>
           </li>';
-}
-?>
-          </div>
-        </li>
-      </ul>
+              }
+              ?>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<div class="container">
-
-  <!-- SEARCH FORM START -->
-
+  <div class="container">
     <form action="" method="get">
-      <div id="showinput" class="d-flex">
+      <div class="search d-flex">
+        <input id="searchinput" class="w-75 rounded-1 font-italic" type="text" placeholder=" Type a destination...">
+        <button id="searchinput" class="bg-transparent border-0" type="submit">
+          <img class="mx-1" src="./ICONS/search.png" alt="loop" width="25" height="25">
+        </button>
 
-        <!-- HIDDEN INPUT START -->
-            <input class="searchinput w-75 rounded-1 font-italic" type="text" placeholder=" Type a destination...">
-              <button class="searchinputbtn bg-transparent border-0" type="submit">
-                <img class="mx-1" src="./ICONS/search.png" alt="loop" width="25" height="25">
-              </button>
-
-        <!-- HIDDEN INPUT END -->
-
-        <!-- HEADER FOR DESTINATION WITH A LOOP TO EXPAND ONCLICK START -->
-          <h3 class="destinations text-light mx-3">Destinations</h3>
-          <a href="">
-            <img id="loop" class="mt-1" src="./ICONS/search.png" alt="loop" width="25" height="25">
-          </a>
-
-        <!-- HEADER FOR DESTINATION WITH A LOOP TO EXPAND ONCLICK END -->
-        </div>
+        <!-- <h3 class="text-light mx-3">Destinations</h3>
+        <a href="">
+          <img id="loop" class="mt-1" src="./ICONS/search.png" alt="loop" width="25" height="25">
+        </a> -->
     </form>
-    <!-- SEARCH FORM END -->
+  </div>
 
-
-<div class="row">
-  <div class="col col-lg-12 col-md-12 col-sm-12 my-5 d-flex flex-wrap justify-content-between">
-
-  <!-- SHOW ALL DESTINATIONS ON CARD-DISPLAY START -->
-
-    <?php foreach ($destinations as $destination): ?>
+  <div class="row">
+    <div class="col col-lg-12 col-md-12 col-sm-12 my-5 d-flex flex-wrap justify-content-between">
 
       <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
-        <img class="rounded-0" src="../<?= $destination->getImage() ?>" class="card-img-top" alt="city">
-          <div class="card-body">
-            <h4 class="card-title text-center my-2"> <span><img src="../<?= $destination->getFlag() ?>" alt="flag" width="30" height="30"> </span> <?= $destination->getLocation() ?> </h4>
-            <h6 class="text-center my-4">  <?= $destination->getCountry() ?> </h6>
-              <div class="text-center d-flex justify-content-center text-secondary">
-                <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
-                <p id="generalnote" class="mb-1">4.8</p>
-              </div>
-              <div class="text-center my-2">
-                <a href="#" class="btn text-light rounded-0">Go There!</a>
-              </div>
+        <img class="rounded-0" src="../IMAGES/nyc.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"> <span><img src="../ICONS/usa.png" alt="flag" width="30" height="30">
+            </span> New York</h4>
+          <h6 class="text-center my-4">USA</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
           </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
       </div>
 
-    <?php endforeach; ?>
-          
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/bangkok.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/thailand.png" alt="flag" width="30"
+                height="30"> </span> Bangkok</h4>
+          <h6 class="text-center my-4">Thailand</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.7</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
         </div>
+      </div>
+
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/helsinki.avif" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/finland.png" alt="flag" width="30"
+                height="30"> </span> Helsinki</h4>
+          <h6 class="text-center my-4">Finland</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/losangeles.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/usa.png" alt="flag" width="30" height="30">
+            </span> Los Angeles</h4>
+          <h6 class="text-center my-4">USA</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/sydney.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/australia.png" alt="flag" width="30"
+                height="30"> </span> Sydney</h4>
+          <h6 class="text-center my-4">Australia</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/santorini.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/greece.png" alt="flag" width="30"
+                height="30"> </span> Santorini</h4>
+          <h6 class="text-center my-4">Greece</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/london.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/uk.png" alt="flag" width="30" height="30">
+            </span> London</h4>
+          <h6 class="text-center my-4">United Kingdom</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card rounded-0 border-0 m-3" style="width: 17rem; height: 25rem">
+        <img class="rounded-0" src="../IMAGES/florence.jpg" class="card-img-top" alt="city">
+        <div class="card-body">
+          <h4 class="card-title text-center my-2"><span><img src="../ICONS/italy.png" alt="flag" width="30" height="30">
+            </span> Florence</h4>
+          <h6 class="text-center my-4">Italy</h6>
+          <div class="text-center d-flex justify-content-center text-secondary">
+            <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
+            <p id="generalnote" class="mb-1">4.8</p>
+          </div>
+          <div class="text-center my-2">
+            <a href="#" class="btn text-light rounded-0">Go There!</a>
+          </div>
+        </div>
+      </div>
+
     </div>
-
-  <!-- SHOW ALL DESTINATIONS ON CARD-DISPLAY END -->
-
+  </div>
   </div>
 </section>
 
 <script src="./JS/searchbutton.js"></script>
 <?php
-    include_once('PARTIALS/bottom.php');
+include_once('PARTIALS/bottom.php');
 ?>
