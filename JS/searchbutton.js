@@ -8,7 +8,7 @@ const destinations = document.querySelector('.destinations')
 const homeSection = document.querySelector('#home')
 
 
-searchInputShowBtn.addEventListener('click', function (event) {
+searchInputShowBtn.addEventListener('click', function(event){
 
     event.preventDefault();
 

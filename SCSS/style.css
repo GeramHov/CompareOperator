@@ -4,7 +4,8 @@ body {
   font-family: "Roboto", sans-serif;
   overflow-x: hidden; }
   body h1, body h2, body h3, body h4, body h5, body h6 {
-    font-family: "Roboto", sans-serif; }
+    font-family: "Roboto", sans-serif;
+    cursor: default; }
 
 p {
   font-family: "Roboto Slab", serif; }
