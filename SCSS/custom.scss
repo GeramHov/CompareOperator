@@ -93,16 +93,10 @@ p{
         }
     }
 
-    .searchinput{
+    #searchinput{
         border: 1px solid $green;
         height: 4vh;
-        display: none;
     }
-
-    .searchinputbtn{
-        display: none;
-    }
-
 }
 
 .logo {

@@ -45,12 +45,6 @@ p {
   #home .card:not(:hover) {
     transform: scale(1);
     transition: 0.4s ease; }
-  #home .searchinput {
-    border: 1px solid #3AAFA9;
-    height: 4vh;
-    display: none; }
-  #home .searchinputbtn {
-    display: none; }
 
 .logo {
   position: relative;
@@ -119,16 +113,5 @@ p {
     transform: translate(500%, 200%);
     opacity: 0;
     transform: rotate(20deg); } }
-#passreset {
-  height: 100vh;
-  background: #feffff;
-  background: linear-gradient(90deg, #feffff 0%, #def2f1 50%, #feffff 100%); }
-
-#profile {
-  background-color: #eee; }
-  #profile .btn {
-    background-color: #2B7A78; }
-    #profile .btn:hover {
-      background-color: #3AAFA9; }
 
 /*# sourceMappingURL=style.css.map */
