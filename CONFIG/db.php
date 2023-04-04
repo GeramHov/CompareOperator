@@ -1,6 +1,6 @@
 <?php
 
-$dns = 'mysql:host=127.0.0.1;dbname=CompareOperator';
+$dns = 'mysql:host=localhost;dbname=compareOmperator';
 $user = 'root';
 $password = '';
 
