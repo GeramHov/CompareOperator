@@ -4,14 +4,28 @@ class Manager
 {
     private $db;
 
-
-    public function __construct(PDO $db)
+    
+   public function __construct(PDO $db)
     {
         $this->setDb($db);
     }
 
 
-    public function getDestinationsFromDb(Destinations $destinations)
+    public function getAllDestinations()
+    {
+        $sql = "SELECT * FROM destinations";
+        $statement = $this->db->query($sql);
+
+        $destinations = [];
+        $allDestinations = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allDestinations as $destination) {
+            $destinations[] = new Destination($destination);
+        }
+
+        return $destinations;
+    }
+
+    public function getDestinationsFromDb(Destination $destinations)
     {
         $query = $this->db->prepare("SELECT * FROM destinations WHERE id=:id");
         $query->bindValue(":id", $destinations->getId(), PDO::PARAM_INT);
@@ -19,9 +33,9 @@ class Manager
         $ArrayDestinations = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($ArrayDestinations as $data) {
-            $object = new Destinations($data);
-            $destinations->setLocation($object);
-        }
+                $object = new Destination($data);
+                $destinations->setLocation($object);
+            }
     }
 
     public function getAllUsers()
@@ -32,74 +46,20 @@ class Manager
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    public function deleteUser($userId)
+
+    public function delete($something_id)
     {
-        $query = "DELETE FROM users WHERE id = ? AND admin=0";
+        $query = "DELETE FROM something WHERE id = ?";
         $statement = $this->db->prepare($query);
-        $statement->execute([$userId]);
+        $statement->execute([$something_id]);
         // Vérifie si la suppression a été effectuée avec succès
         $num_rows_deleted = $statement->rowCount();
         if ($num_rows_deleted == 0) {
-            echo "<script>alert('Impossible de supprimer l\\'utilisateur.');</script>";
+            throw new Exception("Impossible to delete $something_id.");
         }
     }
 
-    public function banUser(int $userId)
-    {
-        // Vérifier si l'utilisateur que vous essayez de bannir est un administrateur
-        $query = "SELECT admin FROM users WHERE id = ?";
-        $statement = $this->db->prepare($query);
-        $statement->execute([$userId]);
-        $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-        if ($user['admin'] == 1) {
-            echo "<script>alert('Vous ne pouvez pas bannir un administrateur.');</script>";
-        } else {
-            // Si l'utilisateur n'est pas un administrateur, bannir l'utilisateur
-            $query = "UPDATE users SET banned = 1 WHERE id = ?";
-            $statement = $this->db->prepare($query);
-            $statement->execute([$userId]);
-
-            // Vérifie si la mise à jour a été effectuée avec succès
-            $num_rows_updated = $statement->rowCount();
-            if ($num_rows_updated == 0) {
-                echo "<script>alert('Impossible de bannir l\\'utilisateur.');</script>";
-            }
-        }
-    }
-
-    public function unbanUser(int $userId)
-    {
-        // Vérifier si l'utilisateur a été banni auparavant
-        $query = "SELECT banned FROM users WHERE id = ?";
-        $statement = $this->db->prepare($query);
-        $statement->execute([$userId]);
-        $result = $statement->fetch();
-        $banned = $result['banned'];
-
-        if ($banned == 0) {
-            echo "<script>alert('Impossible de débannir l\\'utilisateur qui n\\'a jamais été sanctionné.');</script>";
-        } else {
-            // Mettre à jour la base de données pour débannir l'utilisateur
-            $query = "UPDATE users SET banned = 0 WHERE id = ?";
-            $statement = $this->db->prepare($query);
-            $statement->execute([$userId]);
-
-            // Vérifier si la mise à jour a été effectuée avec succès
-            $num_rows_updated = $statement->rowCount();
-            if ($num_rows_updated == 0) {
-                echo "<script>alert('Impossible de débannir l\\'utilisateur.');</script>";
-            }
-        }
-    }
-
-    // Update la db pour mettre à jour la dernière connection (utilisé en pannel admin)
-    public function updateLastConnection(int $userid)
-    {
-        $currentTime = date('Y-m-d H:i:s');
-        $query = $this->db->prepare("UPDATE users SET last_connection = ? WHERE id = ?");
-        $query->execute(array($currentTime, $userid));
-    }
 
 
 

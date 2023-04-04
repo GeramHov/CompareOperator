@@ -1,29 +1,37 @@
 <?php
-session_start();
+	session_start();
 ?>
 
-<!doctype html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="../LOGO/favicon.ico" sizes="16x16" type="image/png">
-	<title>CompareOperator</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-	<link rel="stylesheet" href="../SCSS/style.css">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-
-<body>
-	<section class="vh-100 gradient-custom-2">
-		<nav class="navbar navbar-expand-lg p-0">
-			<div class="container-fluid mx-5">
-				<img class="logo" src="../LOGO/logo.png" alt=" Logo">
-				<img class="logo logo-hover" src="../IMAGES/star.png" alt="Giant rock">
-				</a>
-		</nav>
+<?php
+	include_once('../PARTIALS/header.php')
+?>
+<section class="vh-100 gradient-custom-2">
+<nav class="navbar navbar-expand-lg p-0">
+  <div class="container-fluid mx-5">
+    <a class="navbar-brand text-light" href="../index.php">
+        <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
+    </a>
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 		<div class="container pb-5 h-75 pt-3">
 			<div class="row d-flex justify-content-center align-items-center h-100">
 				<div class="col-lg-10 col-xl-9">
@@ -38,9 +46,9 @@ session_start();
 
 									<div class="erreur text-danger">
 										<p>
-											<?php
-											if (isset($_SESSION['error'])) {
-												echo $_SESSION['error'];
+											<?php 
+											if(isset($_SESSION['error'])){
+												echo $_SESSION['error']; 
 												session_unset();
 											}
 											?>
@@ -51,7 +59,7 @@ session_start();
 
 										<div class="form-outline mb-2">
 											<input type="email" id="email" class="form-control" value=""
-												placeholder="Email Address" name="email" required />
+												placeholder="Email Address" name="email" required/>
 										</div>
 
 										<div class="form-outline mb-2">
@@ -60,23 +68,23 @@ session_start();
 										</div>
 										<div class="form-outline mb-2">
 											<input type="text" id="prenom" class="form-control" placeholder="Lastname"
-												name="lastname" required />
+												name="lastname" required/>
 										</div>
 										<div class="form-outline mb-2">
 											<input type="password" id="form2Example22" class="form-control"
-												placeholder="Password" name="password" required />
+												placeholder="Password" name="password" required/>
 										</div>
 										<div class="form-outline mb-2">
 											<input type="password" id="passconf" class="form-control"
 												placeholder="Confirm Password" name="passconfirm" required />
 										</div>
 										<div class="text-danger">
-											<?php
-											if (isset($_SESSION['message'])) {
-												echo $_SESSION['message'];
-												session_unset();
-											}
-											?>
+										<?php 
+										if(isset($_SESSION['message'])){
+											echo $_SESSION['message'];
+											session_unset();
+										}
+										 ?>
 										</div>
 										<div class="text-center pt-1 mb-5 pb-1">
 											<button
@@ -112,8 +120,8 @@ session_start();
 			</div>
 		</div>
 	</section>
-	<?php
+<?php
 	include_once('../PARTIALS/bottom.php');
-	?>
+?>
 
 </body>
