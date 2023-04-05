@@ -43,9 +43,64 @@ class Manager
         return $destinations;
     }
 
+    // GETTING ALL COMPANIES BY DEFAULT
+
+    public function getAllCompanies()
+    {
+        $sql = "SELECT * FROM tour_operator";
+        $statement = $this->db->query($sql);
+
+        $companies = [];
+        $allCompanies = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allCompanies as $company) {
+            $companies[] = new TourOperator($company);
+        }
+
+        return $companies;
+    }
+
+    // GETTING SEARCHED COMPANIES BY KEYWORD
+
+    public function getSearchedCompanies($keyWord)
+    {
+        $sql = "SELECT * FROM tour_operator WHERE name LIKE :keyword ";
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(':keyword', '%'.$keyWord.'%');
+
+        $companies = [];
+        $statement->execute();
+        $allCompanies = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allCompanies as $company) {
+            $companies[] = new TourOperator($company);
+        }
+
+        return $companies;
+    }
+
+    public function getOffersByDestination($destinationId) {
+
+        $sql = 'SELECT * FROM offers WHERE destination_id = :destination_id';
+
+        $request = $this->db->prepare($sql);
+        $request->bindParam(':destination_id', $destinationId, PDO::PARAM_INT);
+        $request->execute();
+        $offers = [];
+        while ($resultat = $request->fetch(PDO::FETCH_ASSOC)) {
+            $offers[] = new Offer([
+                'id' => $resultat['id'],
+                'destination_id' => $resultat['destination_id'],
+                'tour_operator_id' => $resultat['tour_operator_id'],
+                'price' => $resultat['price']
+            ]);
+        }
+        return $offers;
+    }
+
+
     public function getDestinationsFromDb(Destination $destinations)
     {
-        $query = $this->db->prepare("SELECT * FROM destinations WHERE id=:id");
+        $sql = "SELECT * FROM destinations WHERE id=:id";
+        $query = $this->db->prepare($sql);
         $query->bindValue(":id", $destinations->getId(), PDO::PARAM_INT);
         $query->execute();
         $ArrayDestinations = $query->fetchAll(PDO::FETCH_ASSOC);

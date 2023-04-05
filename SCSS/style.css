@@ -7,12 +7,15 @@ body {
     font-family: "Roboto", sans-serif;
     cursor: default; }
 
+.text-green {
+  color: #2B7A78; }
+
 p {
   font-family: "Roboto Slab", serif; }
 
 #home {
   width: 100%;
-  height: 130vh;
+  height: auto;
   background: #2b7a78;
   background: linear-gradient(90deg, #2b7a78 20%, #3aafa9 47%, #2b7a78 82%);
   background-size: cover; }
@@ -35,15 +38,16 @@ p {
     background-color: #17252A; }
     #home .btn:hover {
       background-color: #3AAFA9; }
-  #home .card .btn {
+  #home #card .btn {
     width: 8rem;
     background-color: #17252A; }
-    #home .card .btn:hover {
+    #home #card .btn:hover {
       background-color: #3AAFA9; }
-  #home .card:hover {
+  #home #card:hover {
+    box-shadow: #DEF2F1 0px 10px 36px 0px, #DEF2F1 0px 0px 0px 1px;
     transform: scale(1.06);
     transition: 0.4s ease; }
-  #home .card:not(:hover) {
+  #home #card:not(:hover) {
     transform: scale(1);
     transition: 0.4s ease; }
   #home .searchinput {
@@ -52,6 +56,15 @@ p {
     display: none; }
   #home .searchinputbtn {
     display: none; }
+  #home .startingprice {
+    padding-top: 1px; }
+  #home .closeup {
+    margin-top: 10px !important;
+    margin-right: 14px;
+    display: none;
+    cursor: pointer; }
+  #home .morebtn {
+    transform: rotate(180deg); }
 
 .logo {
   position: relative;
@@ -63,6 +76,22 @@ p {
   .logo:not(:hover) {
     transform: scale(1);
     transition: 0.4s ease; }
+
+#partners {
+  width: 100%;
+  height: auto;
+  overflow-x: hidden;
+  background-color: #DEF2F1;
+  background-size: cover; }
+  #partners .searchinputcomp {
+    border: 1px solid #3AAFA9;
+    height: 4vh;
+    display: none; }
+  #partners .searchinputcompbtn {
+    display: none; }
+  #partners .closeupcomp {
+    display: none;
+    cursor: pointer; }
 
 .gradient-custom-2 {
   background: #fccb90;

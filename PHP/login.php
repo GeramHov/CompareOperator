@@ -22,7 +22,7 @@ session_start();
           <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-light mx-2" href="#"><h5>Features</h5></a>
+          <a class="nav-link text-light mx-2" href="#"><h5>Partners</h5></a>
         </li>
         <li class="nav-item">
           <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>

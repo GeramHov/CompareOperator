@@ -7,8 +7,7 @@ class Destination
     private $country;
     private $flag;
     private $image;
-    private $price;
-    private $tourOperatorId;
+    private $startingPrice;
 
     public function __construct($data)
     {
@@ -21,8 +20,7 @@ class Destination
         $this->setCountry($data['country']);
         $this->setFlag($data['flag']);
         $this->setImage($data['image']);
-        $this->setPrice($data['price']);
-        $this->setTourOperatorId($data['tour_operator_id']);
+        $this->setstartingPrice($data['starting_price']);
     }
 
     public function getId()
@@ -49,26 +47,14 @@ class Destination
         return $this;
     }
 
-    public function getPrice()
+    public function getstartingPrice()
     {
-        return $this->price;
+        return $this->startingPrice;
     }
 
-    public function setPrice($price)
+    public function setstartingPrice($price)
     {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getTourOperatorId()
-    {
-        return $this->tourOperatorId;
-    }
-
-    public function setTourOperatorId($tourOperatorId)
-    {
-        $this->tourOperatorId = $tourOperatorId;
+        $this->startingPrice = $price;
 
         return $this;
     }
