@@ -1,11 +1,13 @@
 <?php
 
-class Destinations
+class Destination
 {
     private $id;
     private $location;
-    private $price;
-    private $tourOperatorId;
+    private $country;
+    private $flag;
+    private $image;
+    private $startingPrice;
 
     public function __construct($data)
     {
@@ -15,8 +17,10 @@ class Destinations
     public function hydrate(array $data) {
         $this->setId($data['id']);
         $this->setLocation($data['location']);
-        $this->setPrice($data['price']);
-        $this->setTourOperatorId($data['tour_operator_id']);
+        $this->setCountry($data['country']);
+        $this->setFlag($data['flag']);
+        $this->setImage($data['image']);
+        $this->setstartingPrice($data['starting_price']);
     }
 
     public function getId()
@@ -43,26 +47,50 @@ class Destinations
         return $this;
     }
 
-    public function getPrice()
+    public function getstartingPrice()
     {
-        return $this->price;
+        return $this->startingPrice;
     }
 
-    public function setPrice($price)
+    public function setstartingPrice($price)
     {
-        $this->price = $price;
+        $this->startingPrice = $price;
 
         return $this;
     }
 
-    public function getTourOperatorId()
+    public function getCountry()
     {
-        return $this->tourOperatorId;
+        return $this->country;
     }
 
-    public function setTourOperatorId($tourOperatorId)
+    public function setCountry($country)
     {
-        $this->tourOperatorId = $tourOperatorId;
+        $this->country = $country;
+
+        return $this;
+    }
+
+    public function getFlag()
+    {
+        return $this->flag;
+    }
+
+    public function setFlag($flag)
+    {
+        $this->flag = $flag;
+
+        return $this;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
 
         return $this;
     }

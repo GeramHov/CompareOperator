@@ -5,7 +5,8 @@ class TourOperator
     private $id;
     private $name;
     private $link;
-
+    private $icon;
+    
     public function __construct($data)
     {
         $this->hydrate($data); 
@@ -15,6 +16,7 @@ class TourOperator
         $this->setId($data['id']);
         $this->setName($data['name']);
         $this->setLink($data['link']);
+        $this->setIcon($data['icon']);
     }
  
     public function getId()
@@ -49,6 +51,18 @@ class TourOperator
     public function setLink($link)
     {
         $this->link = $link;
+
+        return $this;
+    }
+
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+ 
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
 
         return $this;
     }

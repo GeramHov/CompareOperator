@@ -11,15 +11,103 @@ class Manager
     }
 
 
-    public function getDestinationsFromDb(Destinations $destinations)
+    // GETTING ALL DESTINATION BY DEFAULT
+    public function getAllDestinations()
     {
-        $query = $this->db->prepare("SELECT * FROM destinations WHERE id=:id");
+        $sql = "SELECT * FROM destinations";
+        $statement = $this->db->query($sql);
+
+        $destinations = [];
+        $allDestinations = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allDestinations as $destination) {
+            $destinations[] = new Destination($destination);
+        }
+
+        return $destinations;
+    }
+
+    // GETTING SEARCHED DESTINATIONS BY KEYWORD
+    public function getSearchedDestinations($keyWord)
+    {
+        $sql = "SELECT * FROM destinations WHERE location LIKE :keyword OR country LIKE :keyword";
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(':keyword', '%' . $keyWord . '%');
+
+        $destinations = [];
+        $statement->execute();
+        $allDestinations = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allDestinations as $destination) {
+            $destinations[] = new Destination($destination);
+        }
+
+        return $destinations;
+    }
+
+    // GETTING ALL COMPANIES BY DEFAULT
+
+    public function getAllCompanies()
+    {
+        $sql = "SELECT * FROM tour_operator";
+        $statement = $this->db->query($sql);
+
+        $companies = [];
+        $allCompanies = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allCompanies as $company) {
+            $companies[] = new TourOperator($company);
+        }
+
+        return $companies;
+    }
+
+    // GETTING SEARCHED COMPANIES BY KEYWORD
+
+    public function getSearchedCompanies($keyWord)
+    {
+        $sql = "SELECT * FROM tour_operator WHERE name LIKE :keyword ";
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(':keyword', '%' . $keyWord . '%');
+
+        $companies = [];
+        $statement->execute();
+        $allCompanies = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allCompanies as $company) {
+            $companies[] = new TourOperator($company);
+        }
+
+        return $companies;
+    }
+
+    public function getOffersByDestination($destinationId)
+    {
+
+        $sql = 'SELECT * FROM offers WHERE destination_id = :destination_id';
+
+        $request = $this->db->prepare($sql);
+        $request->bindParam(':destination_id', $destinationId, PDO::PARAM_INT);
+        $request->execute();
+        $offers = [];
+        while ($resultat = $request->fetch(PDO::FETCH_ASSOC)) {
+            $offers[] = new Offer([
+                'id' => $resultat['id'],
+                'destination_id' => $resultat['destination_id'],
+                'tour_operator_id' => $resultat['tour_operator_id'],
+                'price' => $resultat['price']
+            ]);
+        }
+        return $offers;
+    }
+
+
+    public function getDestinationsFromDb(Destination $destinations)
+    {
+        $sql = "SELECT * FROM destinations WHERE id=:id";
+        $query = $this->db->prepare($sql);
         $query->bindValue(":id", $destinations->getId(), PDO::PARAM_INT);
         $query->execute();
         $ArrayDestinations = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($ArrayDestinations as $data) {
-            $object = new Destinations($data);
+            $object = new Destination($data);
             $destinations->setLocation($object);
         }
     }
@@ -32,6 +120,19 @@ class Manager
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function delete($something_id)
+    {
+        $query = "DELETE FROM something WHERE id = ?";
+        $statement = $this->db->prepare($query);
+        $statement->execute([$something_id]);
+        // Vérifie si la suppression a été effectuée avec succès
+        $num_rows_deleted = $statement->rowCount();
+        if ($num_rows_deleted == 0) {
+            throw new Exception("Impossible to delete $something_id.");
+        }
+    }
+
     public function deleteUser($userId)
     {
         $query = "DELETE FROM users WHERE id = ? AND admin=0";
@@ -100,6 +201,7 @@ class Manager
         $query = $this->db->prepare("UPDATE users SET last_connection = ? WHERE id = ?");
         $query->execute(array($currentTime, $userid));
     }
+
 
 
 
