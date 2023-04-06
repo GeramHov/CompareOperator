@@ -8,6 +8,7 @@ include_once('../PARTIALS/headerlogandsign.php');
 ?>
 <section class="gradient-custom-2">
 
+
      <nav class="navbar navbar-expand-lg p-0">
           <div class="container-fluid mx-5">
                <a class="navbar-brand text-light" href="../index.php">
@@ -44,6 +45,34 @@ include_once('../PARTIALS/headerlogandsign.php');
                </div>
           </div>
      </nav>
+
+<nav class="navbar navbar-expand-lg p-0">
+  <div class="container-fluid mx-5">
+    <a class="navbar-brand text-light" href="../index.php">
+        <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
+    </a>
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Partners</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
 
      <div class="container pb-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">

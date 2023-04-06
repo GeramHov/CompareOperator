@@ -53,6 +53,43 @@ include_once('../PARTIALS/headerlogandsign.php');
 									<img src="../LOGO/logo.png" class="pb-2" style="width: 30%;" alt="logo">
 									<h4 class="mt-1 mb-5 pb-1">We are The Compare Team</h4>
 								</div>
+<nav class="navbar navbar-expand-lg p-0">
+  <div class="container-fluid mx-5">
+    <a class="navbar-brand text-light" href="../index.php">
+        <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
+    </a>
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Partners</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+		<div class="container pb-5 h-75 pt-3">
+			<div class="row d-flex justify-content-center align-items-center h-100">
+				<div class="col-lg-10 col-xl-9">
+					<div class="card rounded-3" style="box-shadow: 0 0 0 transparent;">
+						<div class="row g-0">
+							<div class="col-lg-6 d-flex align-items-center">
+								<div class="card-body p-4 p-lg-5 text-black">
+									<div class="text-center">
+										<img src="../LOGO/logo.png" class="pb-2" style="width: 30%;" alt="logo">
+										<h4 class="mt-1 mb-5 pb-1">We are The Compare Team</h4>
+									</div>
 
 								<div class="erreur text-danger">
 									<p>
