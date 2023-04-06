@@ -6,6 +6,7 @@ $darkgreen : #2B7A78;
 $green : #3AAFA9;
 $light: #DEF2F1;
 $white: #FEFFFF;
+$orange: #FFA500;
 $roboto : 'Roboto', sans-serif;
 $slab : 'Roboto Slab', serif;
 
@@ -17,6 +18,66 @@ $slab : 'Roboto Slab', serif;
 @mixin hoverAnimationOut{
     transform: scale(1.0);
     transition: 0.4s ease; 
+}
+
+
+// HIDDEN RED DOT TO SHOW CARD IS FULL
+#reddot{
+    position: relative;
+    right: 1vw;
+    visibility: hidden;
+}
+
+#commentbox{
+    width: 52em;
+}
+
+#userphoto{
+    display: hidden;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.text-orange{
+    color: $orange;
+}
+
+.text-black{
+    color: $black;
 }
 
 body{
@@ -259,7 +320,7 @@ p{
   }
 
   #profile{
-    background-color: #eee;
+    background-color: $light;
 
     .btn{
         background-color: $darkgreen;

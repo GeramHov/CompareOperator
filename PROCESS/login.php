@@ -17,6 +17,8 @@
               $_SESSION["id"] = $user["id"];
               $_SESSION["email"] = $user["email"];
               $_SESSION["admin"] = $user["admin"];
+              $_SESSION["image"] = $user["image"];
+              $_SESSION["password"] = $user["password"];
     
               header("location: ../index.php");
               exit; // STOP EXECUTION WHEN REDIRECTED

@@ -44,7 +44,6 @@ class Manager
     }
 
     // GETTING ALL COMPANIES BY DEFAULT
-
     public function getAllCompanies()
     {
         $sql = "SELECT * FROM tour_operator";
@@ -60,7 +59,6 @@ class Manager
     }
 
     // GETTING SEARCHED COMPANIES BY KEYWORD
-
     public function getSearchedCompanies($keyWord)
     {
         $sql = "SELECT * FROM tour_operator WHERE name LIKE :keyword ";
@@ -75,6 +73,30 @@ class Manager
         }
 
         return $companies;
+    }
+
+    // UPDATE USER INFORMATIONS
+    public function UpdateUserInformation($id, $firstname, $lastname, $admin, $email, $password, $image)
+    {
+        $sql = "UPDATE users SET firstname = ?, lastname = ?, admin = ?, email = ?, password = ?, image = ? WHERE id = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$firstname, $lastname, $admin, $email, $password, $image, $id]);
+    }
+
+    // ADD USER PHOTO
+    public function addUserPhoto($id, $image)
+    {
+        $sql = "UPDATE users SET image = ? WHERE id = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$image, $id]);
+    }
+
+    // DELETE USER PHOTO
+    public function deleteUserPhoto($id)
+    {
+        $sql = "UPDATE users SET image = ? WHERE id = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute(['profilephoto.png', $id]);
     }
 
     public function getOffersByDestination($destinationId) {

@@ -7,6 +7,7 @@ class User
     private $lastname;
     private $email;
     private $admin;
+    private $image;
 
     public function __construct($data)
     {
@@ -20,6 +21,7 @@ class User
         $this->setLastName($data['lastname']);
         $this->setEmail($data['email']);
         $this->setAdmin($data['admin']);
+        $this->setImage($data['image']);
     }
 
 
@@ -82,4 +84,15 @@ class User
         return $this;
     }
 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 }
