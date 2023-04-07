@@ -4,8 +4,8 @@ class Manager
 {
     private $db;
 
-    
-   public function __construct(PDO $db)
+
+    public function __construct(PDO $db)
     {
         $this->setDb($db);
     }
@@ -25,13 +25,33 @@ class Manager
 
         return $destinations;
     }
+    public function updateDestination($destination_id, $location, $country, $price)
+    {
+        // Préparation de la requête SQL
+        $statement = $this->db->prepare("UPDATE destinations SET location = :location, country = :country, starting_price = :price WHERE id = :id");
+
+        // Bind des valeurs des paramètres
+        $statement->bindValue(':location', $location);
+        $statement->bindValue(':country', $country);
+        $statement->bindValue(':price', $price);
+        $statement->bindValue(':id', $destination_id);
+
+
+        echo "Updating destination with ID = " . $destination_id . " to " . $location . ", " . $country . ", " . $price . "<br>";
+
+        // Exécution de la requête
+        if (!$statement->execute()) {
+            $errorInfo = $statement->errorInfo();
+            echo "Error executing SQL query: " . $errorInfo[2];
+        }
+    }
 
     // GETTING SEARCHED DESTINATIONS BY KEYWORD
     public function getSearchedDestinations($keyWord)
     {
         $sql = "SELECT * FROM destinations WHERE location LIKE :keyword OR country LIKE :keyword";
         $statement = $this->db->prepare($sql);
-        $statement->bindValue(':keyword', '%'.$keyWord.'%');
+        $statement->bindValue(':keyword', '%' . $keyWord . '%');
 
         $destinations = [];
         $statement->execute();
@@ -63,7 +83,7 @@ class Manager
     {
         $sql = "SELECT * FROM tour_operator WHERE name LIKE :keyword ";
         $statement = $this->db->prepare($sql);
-        $statement->bindValue(':keyword', '%'.$keyWord.'%');
+        $statement->bindValue(':keyword', '%' . $keyWord . '%');
 
         $companies = [];
         $statement->execute();
@@ -75,6 +95,9 @@ class Manager
         return $companies;
     }
 
+
+    public function getOffersByDestination($destinationId)
+    {
     // UPDATE USER INFORMATIONS
     public function UpdateUserInformation($id, $firstname, $lastname, $admin, $email, $password, $image)
     {
@@ -100,6 +123,7 @@ class Manager
     }
 
     public function getOffersByDestination($destinationId) {
+
 
         $sql = 'SELECT * FROM offers WHERE destination_id = :destination_id';
 
@@ -128,9 +152,9 @@ class Manager
         $ArrayDestinations = $query->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($ArrayDestinations as $data) {
-                $object = new Destination($data);
-                $destinations->setLocation($object);
-            }
+            $object = new Destination($data);
+            $destinations->setLocation($object);
+        }
     }
 
     public function getAllUsers()
@@ -154,6 +178,74 @@ class Manager
         }
     }
 
+    public function deleteUser($userId)
+    {
+        $query = "DELETE FROM users WHERE id = ? AND admin=0";
+        $statement = $this->db->prepare($query);
+        $statement->execute([$userId]);
+        // Vérifie si la suppression a été effectuée avec succès
+        $num_rows_deleted = $statement->rowCount();
+        if ($num_rows_deleted == 0) {
+            echo "<script>alert('Impossible de supprimer l\\'utilisateur.');</script>";
+        }
+    }
+
+    public function banUser(int $userId)
+    {
+        // Vérifier si l'utilisateur que vous essayez de bannir est un administrateur
+        $query = "SELECT admin FROM users WHERE id = ?";
+        $statement = $this->db->prepare($query);
+        $statement->execute([$userId]);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($user['admin'] == 1) {
+            echo "<script>alert('Vous ne pouvez pas bannir un administrateur.');</script>";
+        } else {
+            // Si l'utilisateur n'est pas un administrateur, bannir l'utilisateur
+            $query = "UPDATE users SET banned = 1 WHERE id = ?";
+            $statement = $this->db->prepare($query);
+            $statement->execute([$userId]);
+
+            // Vérifie si la mise à jour a été effectuée avec succès
+            $num_rows_updated = $statement->rowCount();
+            if ($num_rows_updated == 0) {
+                echo "<script>alert('Impossible de bannir l\\'utilisateur.');</script>";
+            }
+        }
+    }
+
+    public function unbanUser(int $userId)
+    {
+        // Vérifier si l'utilisateur a été banni auparavant
+        $query = "SELECT banned FROM users WHERE id = ?";
+        $statement = $this->db->prepare($query);
+        $statement->execute([$userId]);
+        $result = $statement->fetch();
+        $banned = $result['banned'];
+
+        if ($banned == 0) {
+            echo "<script>alert('Impossible de débannir l\\'utilisateur qui n\\'a jamais été sanctionné.');</script>";
+        } else {
+            // Mettre à jour la base de données pour débannir l'utilisateur
+            $query = "UPDATE users SET banned = 0 WHERE id = ?";
+            $statement = $this->db->prepare($query);
+            $statement->execute([$userId]);
+
+            // Vérifier si la mise à jour a été effectuée avec succès
+            $num_rows_updated = $statement->rowCount();
+            if ($num_rows_updated == 0) {
+                echo "<script>alert('Impossible de débannir l\\'utilisateur.');</script>";
+            }
+        }
+    }
+
+    // Update la db pour mettre à jour la dernière connection (utilisé en pannel admin)
+    public function updateLastConnection(int $userid)
+    {
+        $currentTime = date('Y-m-d H:i:s');
+        $query = $this->db->prepare("UPDATE users SET last_connection = ? WHERE id = ?");
+        $query->execute(array($currentTime, $userid));
+    }
 
 
 
