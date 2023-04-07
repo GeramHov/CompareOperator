@@ -7,9 +7,13 @@ class User
     private $lastname;
     private $email;
     private $admin;
+
     private $created_at;
     private $last_connection;
     private $banned;
+
+    private $image;
+
     public function __construct($data)
     {
         $this->hydrate($data);
@@ -22,9 +26,13 @@ class User
         $this->setLastName($data['lastname']);
         $this->setEmail($data['email']);
         $this->setAdmin($data['admin']);
+
         $this->setCreated_at($data['created_at']);
         $this->setLast_connection($data['last_connection']);
         $this->setBanned($data['banned']);
+
+        $this->setImage($data['image']);
+
     }
 
 
@@ -88,6 +96,7 @@ class User
     }
 
 
+
     /**
      * Get the value of created_at
      */
@@ -144,6 +153,16 @@ class User
     public function setBanned($banned)
     {
         $this->banned = $banned;
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
 
         return $this;
     }

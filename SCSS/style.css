@@ -1,5 +1,58 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+#reddot {
+  position: relative;
+  right: 1vw;
+  visibility: hidden; }
+
+#commentbox {
+  width: 52em; }
+
+#userphoto {
+  display: hidden; }
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px; }
+
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px; }
+
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc; }
+
+.rate:not(:checked) > label:before {
+  content: '★ '; }
+
+.rate > input:checked ~ label {
+  color: #ffc700; }
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217; }
+
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08; }
+
+.text-orange {
+  color: #FFA500; }
+
+.text-black {
+  color: #17252A; }
+
 body {
   font-family: "Roboto", sans-serif;
   overflow-x: hidden; }
@@ -155,7 +208,7 @@ p {
   background: linear-gradient(90deg, #feffff 0%, #def2f1 50%, #feffff 100%); }
 
 #profile {
-  background-color: #eee; }
+  background-color: #DEF2F1; }
   #profile .btn {
     background-color: #2B7A78; }
     #profile .btn:hover {

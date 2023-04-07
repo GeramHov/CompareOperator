@@ -22,6 +22,7 @@ $companies = $manager->getAllCompanies();
         <img class="logo" src="../LOGO/logo.png" alt="Logo">
         <img class="logo logo-hover" src="./IMAGES/star.png" alt="Giant rock">
       </a>
+
       <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -52,17 +53,50 @@ $companies = $manager->getAllCompanies();
           if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
             echo '<li class="nav-item">
                 <a class="nav-link text-light mx-2 me-5" href="../admin.php?info=users">
+
+    <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" aria-current="page" href="../index.php"><h5>Home</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Partners</h5></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light mx-2" href="#"><h5>Contact</h5></a>
+        </li>
+          <?php
+          if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+            echo '<li class="nav-item">
+                <a class="nav-link text-black mx-2 me-5" href="../admin.php">
+
                 <h5>Admin Panel</h5>
                 </a>
               </li>';
           }
           ?>
+
           <li>
             <div class="user ms-5">
               <?php
               if (isset($_SESSION['id'])) {
                 echo '<a href="../profile.php">
             <img class="mt-1" src="../ICONS/profile-user.png" alt="usericon" width="30" height="30" />
+
+        <li>
+          <div class="user ms-5">
+            <a href="">
+              <img src="ICONS/shopping-cart.png" alt="purchasecard" width="30" height="30">
+              <img id="reddot" class="mb-1" src="ICONS/red-dot.png" alt="purchasecard" width="7" height="7">
+            </a>
+            <?php
+if(isset($_SESSION['id']) && $_SESSION['image'] == 'profilephoto.png') {
+    echo '<a href="../profile.php">
+            <img class="mt-1 ms-2" src="../ICONS/profile-user.png" alt="usericon" width="30" height="30" />
+
           </a>
           <li class="nav-item mt-2">
             <div class="dropdown">
@@ -74,8 +108,29 @@ $companies = $manager->getAllCompanies();
             </div>
           </li>';
 
+
               } else {
                 echo '<li class="nav-item ">
+
+} elseif (isset($_SESSION['id']) && $_SESSION['image'] != 'profilephoto.png') {
+      echo '<a href="../profile.php">
+      <img class="mt-1 rounded-5 ms-2" src="../USER_PHOTOS/'. $_SESSION['image'] .'" alt="usericon" width="40" height="40" />
+    </a>
+    <li class="nav-item mt-2">
+      <div class="dropdown">
+        <a class="dropdown-toggle text-light mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="../PROCESS/logout.php">LogOut</a></li>
+        </ul>
+      </div>
+    </li>';
+}
+
+
+else {
+    echo '<li class="nav-item ">
+
             <a class="nav-link text-light mx-2" href="../PHP/register.php">Sign Up</a>
           </li>
           <li class="nav-item ">
@@ -183,9 +238,14 @@ $companies = $manager->getAllCompanies();
                 <h4 class="card-title text-center my-2"> <span><img src="../' . $destination->getFlag() . ' " alt="flag" width="30" height="30"> </span>  ' . $destination->getLocation() . ' </h4>
                 <h6 class="text-center my-4">  ' . $destination->getCountry() . ' </h6>
                   <div class="text-center d-flex justify-content-center text-secondary">
+
                   <div class="startingprice text-secondary mx-3" <p>From  <span class="text-dark fw-bold">' . $destination->getstartingPrice() . ' €</span> </p> </div>
                     <img class="mt-1 me-1" src="../ICONS/star.png" alt="star" width="15" height="15">
                     <p id="generalnote" class="mb-1">4.8</p>
+
+                  <div class="startingprice text-secondary mx-3" <p>From  <span class="text-dark fw-bold">'. $destination->getstartingPrice() .' €</span> </p> </div>
+                    
+
                   </div>
                   <div class="text-center my-2">
                     <button class="btn text-light rounded-0" data-bs-toggle="modal" data-bs-target="#modal-' . $destination->getId() . '">Go There!</button>
@@ -197,31 +257,68 @@ $companies = $manager->getAllCompanies();
         <div class="modal-dialog">
           <div class="modal-content mx-auto">
             <div class="modal-header">
+
               <h1 class="modal-title fs-5" id="generalLabel">' . $destination->getLocation() . '</h1>
               <h3 class="fw-bold mx-4">' . $destination->getCountry() . '</h3>
+
+              <h1 class="modal-title fs-5" id="generalLabel">'. $destination->getLocation().'</h1>
+              <h3 class="fw-bold mx-4">'. $destination->getCountry() .'</h3>
+              <img class="mb-1" src="../'. $destination->getFlag().' " alt="flag" width="30" height="30">
+
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
           <div class="modal-body">
-            <h3>We have found 3 offers!</h3>
-
-            <div class="card bg-light w-75 my-4">
-            <div class="card-body h-25">
-              <div class="d-flex justify-content-center">
-                <a href="" target="_blank">
-                  <img src="./TOUR_OPERATOR_ICON/american.png" alt="comp" width="95" height="50">
-                </a>
+          <h4>We have found 3 offers!</h4>
+          
+          <div class="d-flex">
+          <div class="card bg-light w-75 my-3">
+            <div class="d-flex">
+              <div class="card-body h-25">
+                <div class="d-flex justify-content-center">
+                  <a href="" target="_blank">
+                    <img src="./TOUR_OPERATOR_ICON/american.png" alt="comp" width="95" height="50">
+                  </a>
+                </div>
+                <h5 class="text-secondary text-center mt-2">
+                American Airways
+                </h5>
               </div>
-              <h5 class="text-secondary text-center mt-2">
-              American Airways
-              </h5>
             </div>
           </div>
+          <div class="flex-column align-items-center py-4">
+            <div class="d-flex justify-content-center align-items-center mx-4">
+              <img class="mx-2 mb-1" src="./ICONS/plane.png" alt="plane" width="45" height="45">
+              <p class="text-secondary mx-3">Price:</p>
+              <h3 class="text-green fw-bold pb-2">799 <span>€</span> </h3>
+            </div>
+            <div class="rate mx-5">
+    <input type="radio" id="star5" name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+  </div>
+        </div> 
 
-          <div class="card bg-light w-75 my-4">
+          </div>
+      <div id="commentbox" class="form-floating mb-4 d-flex" >
+      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+      <label class="text-secondary" for="floatingTextarea">Comments</label>
+      <button class="btn text-light mx-1 rounded-0">Send</button>
+      </div>
+
+      <div class="d-flex">
+      <div class="card bg-light w-75 my-3">
+        <div class="d-flex">
           <div class="card-body h-25">
             <div class="d-flex justify-content-center">
               <a href="" target="_blank">
-                <img src="./TOUR_OPERATOR_ICON/american.png" alt="comp" width="95" height="50">
+                <img src="./TOUR_OPERATOR_ICON/qatar.png" alt="comp" width="95" height="50">
               </a>
             </div>
             <h5 class="text-secondary text-center mt-2">
@@ -229,19 +326,76 @@ $companies = $manager->getAllCompanies();
             </h5>
           </div>
         </div>
-
-        <div class="card bg-light w-75 my-4">
-        <div class="card-body h-25">
-          <div class="d-flex justify-content-center">
-            <a href="" target="_blank">
-              <img src="./TOUR_OPERATOR_ICON/american.png" alt="comp" width="95" height="50">
-            </a>
-          </div>
-          <h5 class="text-secondary text-center mt-2">
-          American Airways
-          </h5>
-        </div>
       </div>
+      <div class="flex-column align-items-center py-4">
+        <div class="d-flex justify-content-center align-items-center mx-4">
+          <img class="mx-2 mb-1" src="./ICONS/plane.png" alt="plane" width="45" height="45">
+          <p class="text-secondary mx-3">Price:</p>
+          <h3 class="text-orange fw-bold pb-2">799 <span>€</span> </h3>
+        </div>
+        <div class="rate mx-5">
+<input type="radio" id="star5" name="rate" value="5" />
+<label for="star5" title="text">5 stars</label>
+<input type="radio" id="star4" name="rate" value="4" />
+<label for="star4" title="text">4 stars</label>
+<input type="radio" id="star3" name="rate" value="3" />
+<label for="star3" title="text">3 stars</label>
+<input type="radio" id="star2" name="rate" value="2" />
+<label for="star2" title="text">2 stars</label>
+<input type="radio" id="star1" name="rate" value="1" />
+<label for="star1" title="text">1 star</label>
+</div>
+    </div> 
+
+      </div>
+  <div id="commentbox" class="form-floating mb-4 d-flex" >
+  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+  <label class="text-secondary" for="floatingTextarea">Comments</label>
+  <button class="btn text-light mx-1 rounded-0">Send</button>
+  </div>
+
+  <div class="d-flex">
+  <div class="card bg-light w-75 my-3">
+    <div class="d-flex">
+      <div class="card-body h-25">
+        <div class="d-flex justify-content-center">
+          <a href="" target="_blank">
+            <img src="./TOUR_OPERATOR_ICON/lufthansa.png" alt="comp" width="95" height="50">
+          </a>
+        </div>
+        <h5 class="text-secondary text-center mt-2">
+        American Airways
+        </h5>
+      </div>
+    </div>
+  </div>
+  <div class="flex-column align-items-center py-4">
+    <div class="d-flex justify-content-center align-items-center mx-4">
+      <img class="mx-2 mb-1" src="./ICONS/plane.png" alt="plane" width="45" height="45">
+      <p class="text-secondary mx-3">Price:</p>
+      <h3 class="text-danger fw-bold pb-2">799 <span>€</span> </h3>
+    </div>
+    <div class="rate mx-5">
+<input type="radio" id="star5" name="rate" value="5" />
+<label for="star5" title="text">5 stars</label>
+<input type="radio" id="star4" name="rate" value="4" />
+<label for="star4" title="text">4 stars</label>
+<input type="radio" id="star3" name="rate" value="3" />
+<label for="star3" title="text">3 stars</label>
+<input type="radio" id="star2" name="rate" value="2" />
+<label for="star2" title="text">2 stars</label>
+<input type="radio" id="star1" name="rate" value="1" />
+<label for="star1" title="text">1 star</label>
+</div>
+</div> 
+
+  </div>
+<div id="commentbox" class="form-floating mb-4 d-flex" >
+<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+<label class="text-secondary" for="floatingTextarea">Comments</label>
+<button class="btn text-light mx-1 rounded-0">Send</button>
+</div>
+      
 
           </div>
           <div class="modal-footer">
