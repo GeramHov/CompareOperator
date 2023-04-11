@@ -8,7 +8,6 @@ class User
     private $email;
     private $admin;
     private $image;
-
     private $created_at;
     private $last_connection;
     private $banned;
@@ -26,7 +25,6 @@ class User
         $this->setEmail($data['email']);
         $this->setAdmin($data['admin']);
         $this->setImage($data['image']);
-
         $this->setCreated_at($data['created_at']);
         $this->setLast_connection($data['last_connection']);
         $this->setBanned($data['banned']);

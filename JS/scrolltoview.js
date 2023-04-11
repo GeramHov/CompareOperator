@@ -1,3 +1,5 @@
+//  SCROLL INTO VIEW PORT SECTION PARTNERS
+
 document.addEventListener('DOMContentLoaded', function() {
   const link = document.querySelector('#partnersbtn');
   link.addEventListener('click', function() {

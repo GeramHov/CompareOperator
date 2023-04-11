@@ -189,6 +189,7 @@ class Manager
         return $feedbacks;
     }
 
+    // DELETE A USER
     public function deleteUser($userId)
     {
         $query = "DELETE FROM users WHERE id = ? AND admin=0";
@@ -201,6 +202,7 @@ class Manager
         }
     }
 
+    // BAN A USER
     public function banUser(int $userId)
     {
         // Vérifier si l'utilisateur que vous essayez de bannir est un administrateur
@@ -225,6 +227,7 @@ class Manager
         }
     }
 
+    // UNBAN A USER
     public function unbanUser(int $userId)
     {
         // Vérifier si l'utilisateur a été banni auparavant
@@ -257,10 +260,6 @@ class Manager
         $query = $this->db->prepare("UPDATE users SET last_connection = ? WHERE id = ?");
         $query->execute(array($currentTime, $userid));
     }
-
-
-
-
 
     public function pretyDump($data)
     {

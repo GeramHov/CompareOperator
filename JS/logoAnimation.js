@@ -1,3 +1,5 @@
+// LOGO ANIMATION
+
 const logo = document.querySelector(".logo");
 const logoHover = document.querySelector(".logo-hover");
 const originalSrc = logo.src;
