@@ -432,7 +432,7 @@ foreach ($destinations as $destination) : ?>
                       <?php foreach ($users as $user) : ?>
                         <div class="d-flex">
                           <img class="rounded-5" src="./USER_PHOTOS/<?= $user->getImage()?>" alt="userphoto" width="35" height="35">
-                          <h6 class="text-secondary mx-3 mt-2"><?= $user->getFirstName() ?>  <?= $user->getLastName() ?> </h6>
+                          <h6 class="text-secondary mx-3 mt-2"><?= $user->getFirstName() ?>  <?= $user->getLastName() ?> :</h6>
                         </div>
                         <?php endforeach ?>
                       <q class="mx-4"><i><?= $feedback->getMessage() ?></i></q>
@@ -450,32 +450,13 @@ foreach ($destinations as $destination) : ?>
   </div>
 
 </section>
+<section id="footer" class="text-light text-center d-flex justify-content-center align-items-center">
+    Gueram  & Polo &copy 2023
+</section>
 
 <!-- SECTION PARTNERS END -->
 
-<script>
-    // Get all radio buttons
-    const stars = document.querySelectorAll('.star-cb-group');
-    const ratingInputs = document.querySelectorAll('input[name="note"]');
-    
-    stars.forEach((element) => {
-      ratingInputs.forEach((input) => {
-          input.addEventListener('click', () => {
-              // If the radio button is checked, add 'checked' class to its label
-              if (input.checked) {
-                  input.nextElementSibling.classList.add('checked');
-              }
-              
-              // Remove 'checked' class from labels of other radio buttons
-              const otherInputs = Array.from(ratingInputs).filter((otherInput) => otherInput !== input);
-              otherInputs.forEach((otherInput) => {
-                  otherInput.nextElementSibling.classList.remove('checked');
-              });
-          });
-      });
-
-    });
-</script>
+<script src="./JS/note.js"></script>
 <script src="./JS/showfeedback.js"></script>
 <script src="./JS/searchbutton.js"></script>
 <script src="./JS/modal.js"></script>

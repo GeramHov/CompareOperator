@@ -1,20 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+$black : #17252A;
+$darkgreen : #2B7A78;
+$green : #3AAFA9;
+$light: #DEF2F1;
+$white: #FEFFFF;
+$orange: #FFA500;
+$roboto : 'Roboto', sans-serif;
+$slab : 'Roboto Slab', serif;
+
 $unchecked-star: '\2606';
 $unchecked-color: #888;
 $checked-star: '\2605';
 $checked-color: #e52;
 
+
+@mixin hoverAnimationIn {
+    transform: scale(1.06);
+    transition: 0.4s ease;
+}
+
+@mixin hoverAnimationOut{
+    transform: scale(1.0);
+    transition: 0.4s ease; 
+}
+
 .star-cb-group {
-  /* remove inline-block whitespace */
   font-size: 2rem;
   * {
     font-size: 1.5rem;
   }
   
   
-  /* flip the order so we can use the + and ~ combinators */
   unicode-bidi: bidi-override;
   direction: rtl;
   & > input {
@@ -43,7 +61,6 @@ $checked-color: #e52;
     }
   }
   
-  /* the hidden clearer */
   & > .star-cb-clear + label {
     text-indent: -9999px;
     width: .5em;
@@ -66,33 +83,12 @@ $checked-color: #e52;
   }
 }
 
-// extra styles
 
 #log {
   margin: 1em auto;
   width: 5em;
   text-align: center;
   background: transparent;
-}
-
-
-$black : #17252A;
-$darkgreen : #2B7A78;
-$green : #3AAFA9;
-$light: #DEF2F1;
-$white: #FEFFFF;
-$orange: #FFA500;
-$roboto : 'Roboto', sans-serif;
-$slab : 'Roboto Slab', serif;
-
-@mixin hoverAnimationIn {
-    transform: scale(1.06);
-    transition: 0.4s ease;
-}
-
-@mixin hoverAnimationOut{
-    transform: scale(1.0);
-    transition: 0.4s ease; 
 }
 
 #feedback{
@@ -420,4 +416,9 @@ p{
             background-color: $green;
         }
     }
+  }
+
+  #footer{
+    background: $black;
+    height: 30vh;
   }
