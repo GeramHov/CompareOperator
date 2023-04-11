@@ -8,10 +8,12 @@ class Destination
     private $flag;
     private $image;
     private $startingPrice;
+    private $offers;
 
     public function __construct($data)
     {
         $this->hydrate($data); 
+        $this->offers = [];
     }
 
     public function hydrate(array $data) {
@@ -21,6 +23,16 @@ class Destination
         $this->setFlag($data['flag']);
         $this->setImage($data['image']);
         $this->setstartingPrice($data['starting_price']);
+    }
+
+    public function getOffers()
+    {
+        return $this->offers;
+    }
+
+    public function addOffer($offer)
+    {
+    $this->offers[] = $offer;
     }
 
     public function getId()

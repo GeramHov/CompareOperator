@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header ("Location: ../PHP/register.php");
 				$_SESSION['error'] = "E-mail exists already!";
 			} else {
-				$query = $db->prepare("INSERT INTO users(firstname,lastname,email,password) VALUES (?,?,?,?)");
+				$query = $db->prepare("INSERT INTO users(firstname,lastname,email,password, created_at) VALUES (?,?,?,?, NOW())");
 				if ($query->execute(array($firstname, $lastname, $email, md5($password)))) {
 					header("location: ../index.php");
 				}

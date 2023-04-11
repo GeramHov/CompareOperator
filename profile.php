@@ -11,7 +11,7 @@ $destinations = $manager->getAllDestinations();
 if(isset($_FILES['imgfile'])) {
     $image = $_FILES['imgfile']['name'];
 
-    move_uploaded_file($_FILES['imgfile']['tmp_name'], 'USER_PHOTOS/' . $image);
+    move_uploaded_file($_FILES['imgfile']['tmp_name'], './USER_PHOTOS/' . $image);
 
   }
 

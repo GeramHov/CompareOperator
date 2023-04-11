@@ -1,6 +1,58 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+.star-cb-group {
+  /* remove inline-block whitespace */
+  font-size: 2rem;
+  /* flip the order so we can use the + and ~ combinators */
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  /* the hidden clearer */ }
+  .star-cb-group * {
+    font-size: 1.5rem; }
+  .star-cb-group > input {
+    display: none; }
+    .star-cb-group > input + label {
+      /* only enough room for the star */
+      display: inline-block;
+      overflow: hidden;
+      text-indent: 9999px;
+      width: 1em;
+      white-space: nowrap;
+      cursor: pointer; }
+      .star-cb-group > input + label:before {
+        display: inline-block;
+        text-indent: -9999px;
+        content: "☆";
+        color: #888; }
+    .star-cb-group > input:checked ~ label:before, .star-cb-group > input + label:hover ~ label:before, .star-cb-group > input + label:hover:before {
+      content: "★";
+      color: #e52;
+      text-shadow: 0 0 1px #333; }
+  .star-cb-group > .star-cb-clear + label {
+    text-indent: -9999px;
+    width: .5em;
+    margin-left: -.5em; }
+  .star-cb-group > .star-cb-clear + label:before {
+    width: .5em; }
+  .star-cb-group:hover > input + label:before {
+    content: "☆";
+    color: #888;
+    text-shadow: none; }
+  .star-cb-group:hover > input + label:hover ~ label:before, .star-cb-group:hover > input + label:hover:before {
+    content: "★";
+    color: #e52;
+    text-shadow: 0 0 1px #333; }
+
+#log {
+  margin: 1em auto;
+  width: 5em;
+  text-align: center;
+  background: transparent; }
+
+#feedback {
+  display: none; }
+
 #reddot {
   position: relative;
   right: 1vw;
@@ -55,10 +107,21 @@
 
 body {
   font-family: "Roboto", sans-serif;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  scrollbar-width: none;
+  /* pour Firefox */ }
   body h1, body h2, body h3, body h4, body h5, body h6 {
     font-family: "Roboto", sans-serif;
     cursor: default; }
+  body::-webkit-scrollbar {
+    width: 0.5rem;
+    /* ajuster la largeur de la barre de défilement */ }
+  body::-webkit-scrollbar-thumb {
+    background-color: #17252A;
+    /* couleur de la barre de défilement */ }
+  body::-webkit-scrollbar-track {
+    background-color: #DEF2F1;
+    /* couleur de la piste de la barre de défilement */ }
 
 .text-green {
   color: #2B7A78; }

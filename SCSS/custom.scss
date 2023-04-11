@@ -1,6 +1,81 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+$unchecked-star: '\2606';
+$unchecked-color: #888;
+$checked-star: '\2605';
+$checked-color: #e52;
+
+.star-cb-group {
+  /* remove inline-block whitespace */
+  font-size: 2rem;
+  * {
+    font-size: 1.5rem;
+  }
+  
+  
+  /* flip the order so we can use the + and ~ combinators */
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  & > input {
+    display: none;
+    & + label {
+      /* only enough room for the star */
+      display: inline-block;
+      overflow: hidden;
+      text-indent: 9999px;
+      width: 1em;
+      white-space: nowrap;
+      cursor: pointer;
+      &:before {
+        display: inline-block;
+        text-indent: -9999px;
+        content: $unchecked-star;
+        color: $unchecked-color;
+      }
+    }
+    &:checked ~ label:before,
+      & + label:hover ~ label:before,
+      & + label:hover:before {
+      content: $checked-star;
+      color: #e52;
+      text-shadow: 0 0 1px #333;
+    }
+  }
+  
+  /* the hidden clearer */
+  & > .star-cb-clear + label {
+    text-indent: -9999px;
+    width: .5em;
+    margin-left: -.5em;
+  }
+  & > .star-cb-clear + label:before {
+    width: .5em;
+  }
+
+  &:hover > input + label:before {
+    content: $unchecked-star;
+    color: $unchecked-color;
+    text-shadow: none;
+  }
+  &:hover > input + label:hover ~ label:before,
+  &:hover > input + label:hover:before {
+    content: $checked-star;
+    color: $checked-color;
+    text-shadow: 0 0 1px #333;
+  }
+}
+
+// extra styles
+
+#log {
+  margin: 1em auto;
+  width: 5em;
+  text-align: center;
+  background: transparent;
+}
+
+
 $black : #17252A;
 $darkgreen : #2B7A78;
 $green : #3AAFA9;
@@ -18,6 +93,10 @@ $slab : 'Roboto Slab', serif;
 @mixin hoverAnimationOut{
     transform: scale(1.0);
     transition: 0.4s ease; 
+}
+
+#feedback{
+    display: none;
 }
 
 
@@ -88,6 +167,18 @@ body{
         font-family: $roboto;
         cursor: default;
     }
+
+    scrollbar-width: none; /* pour Firefox */
+  &::-webkit-scrollbar {
+    width: 0.5rem; /* ajuster la largeur de la barre de défilement */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $black; /* couleur de la barre de défilement */
+  }
+  &::-webkit-scrollbar-track {
+    background-color: $light; /* couleur de la piste de la barre de défilement */
+  }
+
 
 }
 

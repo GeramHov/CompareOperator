@@ -4,54 +4,54 @@ class Manager
 {
     private $db;
 
-
-    public function __construct(PDO $db)
+    
+   public function __construct(PDO $db)
     {
         $this->setDb($db);
     }
 
 
-    // GETTING ALL DESTINATION BY DEFAULT
+    // GETTING ALL DESTINATION BY DEFAULT WITH ITS OFFERS
     public function getAllDestinations()
     {
-        $sql = "SELECT * FROM destinations";
+        $sql = "SELECT destinations.id, destinations.location, destinations.country, destinations.flag, destinations.image, destinations.starting_price, tour_operator.name, tour_operator.icon, offers.price
+                FROM destinations
+                JOIN offers ON destinations.id = offers.destination_id
+                JOIN tour_operator ON tour_operator.id = offers.tour_operator_id";
         $statement = $this->db->query($sql);
-
+    
         $destinations = [];
         $allDestinations = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($allDestinations as $destination) {
-            $destinations[] = new Destination($destination);
+            $destinationId = $destination['id'];
+            if (!isset($destinations[$destinationId])) {
+                $destinations[$destinationId] = new Destination([
+                    'id' => $destinationId,
+                    'location' => $destination['location'],
+                    'country' => $destination['country'],
+                    'flag' => $destination['flag'],
+                    'image' => $destination['image'],
+                    'starting_price' => $destination['starting_price'],
+                    'offers' => [],
+                ]);
+            }
+            $destinations[$destinationId]->addOffer([
+                'tour_operator_name' => $destination['name'],
+                'tour_operator_icon' => $destination['icon'],
+                'price' => $destination['price'],
+            ]);
         }
-
+    
         return $destinations;
     }
-    public function updateDestination($destination_id, $location, $country, $price)
-    {
-        // Préparation de la requête SQL
-        $statement = $this->db->prepare("UPDATE destinations SET location = :location, country = :country, starting_price = :price WHERE id = :id");
-
-        // Bind des valeurs des paramètres
-        $statement->bindValue(':location', $location);
-        $statement->bindValue(':country', $country);
-        $statement->bindValue(':price', $price);
-        $statement->bindValue(':id', $destination_id);
-
-
-        echo "Updating destination with ID = " . $destination_id . " to " . $location . ", " . $country . ", " . $price . "<br>";
-
-        // Exécution de la requête
-        if (!$statement->execute()) {
-            $errorInfo = $statement->errorInfo();
-            echo "Error executing SQL query: " . $errorInfo[2];
-        }
-    }
+    
 
     // GETTING SEARCHED DESTINATIONS BY KEYWORD
     public function getSearchedDestinations($keyWord)
     {
         $sql = "SELECT * FROM destinations WHERE location LIKE :keyword OR country LIKE :keyword";
         $statement = $this->db->prepare($sql);
-        $statement->bindValue(':keyword', '%' . $keyWord . '%');
+        $statement->bindValue(':keyword', '%'.$keyWord.'%');
 
         $destinations = [];
         $statement->execute();
@@ -83,7 +83,7 @@ class Manager
     {
         $sql = "SELECT * FROM tour_operator WHERE name LIKE :keyword ";
         $statement = $this->db->prepare($sql);
-        $statement->bindValue(':keyword', '%' . $keyWord . '%');
+        $statement->bindValue(':keyword', '%'.$keyWord.'%');
 
         $companies = [];
         $statement->execute();
@@ -95,9 +95,6 @@ class Manager
         return $companies;
     }
 
-
-    public function getOffersByDestination($destinationId)
-    {
     // UPDATE USER INFORMATIONS
     public function UpdateUserInformation($id, $firstname, $lastname, $admin, $email, $password, $image)
     {
@@ -124,7 +121,6 @@ class Manager
 
     public function getOffersByDestination($destinationId) {
 
-
         $sql = 'SELECT * FROM offers WHERE destination_id = :destination_id';
 
         $request = $this->db->prepare($sql);
@@ -142,21 +138,16 @@ class Manager
         return $offers;
     }
 
-
-    public function getDestinationsFromDb(Destination $destinations)
+    // ADDING A COMMENT
+    public function addFeedback($comment, $note, $compName, $user)
     {
-        $sql = "SELECT * FROM destinations WHERE id=:id";
-        $query = $this->db->prepare($sql);
-        $query->bindValue(":id", $destinations->getId(), PDO::PARAM_INT);
-        $query->execute();
-        $ArrayDestinations = $query->fetchAll(PDO::FETCH_ASSOC);
-
-        foreach ($ArrayDestinations as $data) {
-            $object = new Destination($data);
-            $destinations->setLocation($object);
-        }
+        $sql = "INSERT INTO feedback (message, note, tour_operator_name, user_id) VALUES (?, ?, ?, ?)";
+        $request = $this->db->prepare($sql);
+        $request->execute([$comment, $note, $compName, $user]);
     }
 
+
+    // GET ALL USERS
     public function getAllUsers()
     {
         $sql = "SELECT * FROM users";
@@ -166,16 +157,36 @@ class Manager
         return $result;
     }
 
-    public function delete($something_id)
+    // GET USER BY HIS ID
+    public function getUserByHisId($id)
     {
-        $query = "DELETE FROM something WHERE id = ?";
-        $statement = $this->db->prepare($query);
-        $statement->execute([$something_id]);
-        // Vérifie si la suppression a été effectuée avec succès
-        $num_rows_deleted = $statement->rowCount();
-        if ($num_rows_deleted == 0) {
-            throw new Exception("Impossible to delete $something_id.");
+        $sql = "SELECT * FROM users WHERE id = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$id]);
+
+        $users = [];
+        $allUsers = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allUsers as $user) {
+            $users[] = new User($user);
         }
+
+        return $users;
+    }
+
+    // GET FEEDBACKS BY ITS ID
+    public function getFeedbacksByCompanyName($name)
+    {
+        $sql = "SELECT * FROM feedback WHERE tour_operator_name = ?";
+        $statement = $this->db->prepare($sql);
+        $statement->execute([$name]);
+
+        $feedbacks = [];
+        $allFeedbacks = $statement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($allFeedbacks as $feedback) {
+            $feedbacks[] = new Feedback($feedback);
+        }
+
+        return $feedbacks;
     }
 
     public function deleteUser($userId)
@@ -246,6 +257,7 @@ class Manager
         $query = $this->db->prepare("UPDATE users SET last_connection = ? WHERE id = ?");
         $query->execute(array($currentTime, $userid));
     }
+
 
 
 

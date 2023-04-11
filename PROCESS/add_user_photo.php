@@ -5,6 +5,7 @@ include_once('../CONFIG/autoload.php');
 
 // ADDING THE PHOTO TO USER PROFILE
 
+
 $manager = new Manager($db);
 $manager->addUserPhoto($_GET['id'], $_GET['imgfile']);
 
