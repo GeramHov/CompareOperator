@@ -6,13 +6,19 @@ session_start();
 <?php
      include_once('../PARTIALS/header.php');
 ?>
+    <link rel="stylesheet" href="../SCSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+
      <section class="gradient-custom-2">
 
 <nav class="navbar navbar-expand-lg p-0">
   <div class="container-fluid mx-5">
-    <a class="navbar-brand text-light" href="../index.php">
-        <img class="logo pt-1" src="../LOGO/logo.png" alt="Mon logo">
-    </a>
+  <a class="navbar-brand text-light" href="../index.php">
+        <img class="logo" src="../LOGO/logo.png" alt="Logo" width=35 height=35>
+        <img class="logo logo-hover" src="../IMAGES/star.png" alt="Giantrock">
+      </a>
     <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,9 +32,6 @@ session_start();
         </li>
         <li class="nav-item">
           <a class="nav-link text-light mx-2" href="#"><h5>Pricing</h5></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light ms-2 me-5" href=""><h5>Disabled</h5></a>
         </li>
       </ul>
     </div>

@@ -5,7 +5,12 @@
 <?php
 	include_once('../PARTIALS/header.php')
 ?>
-<section class="vh-100 gradient-custom-2">
+    <link rel="stylesheet" href="../SCSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
+
+<section class="gradient-custom-2">
 <nav class="navbar navbar-expand-lg p-0">
   <div class="container-fluid mx-5">
     <a class="navbar-brand text-light" href="../index.php">

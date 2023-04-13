@@ -13,16 +13,19 @@ $manager = new Manager($db);
 $companies = $manager->getAllCompanies();
 
 ?>
-
+    <link rel="stylesheet" href="SCSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
 <section id="home">
 
   <!-- NAVBAR -->
 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid mx-5">
-      <a class="navbar-brand text-light" href="../index.php">
-        <img class="logo" src="../LOGO/logo.png" alt="Logo">
-        <img class="logo logo-hover" src="./IMAGES/star.png" alt="Giant rock">
+      <a class="navbar-brand text-light" href="index.php">
+        <img class="logo" src="LOGO/logo.png" alt="Logo">
+        <img class="logo logo-hover" src="./IMAGES/star.png" alt="Giantrock">
       </a>
       <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,7 +33,7 @@ $companies = $manager->getAllCompanies();
       <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link text-light mx-2" aria-current="page" href="../index.php">
+            <a class="nav-link text-light mx-2" aria-current="page" href="index.php">
               <h5>Home</h5>
             </a>
           </li>
@@ -47,7 +50,7 @@ $companies = $manager->getAllCompanies();
           <?php
           if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
             echo '<li class="nav-item">
-                <a class="nav-link text-light mx-2 me-5" href="../admin.php?info=users">
+                <a class="nav-link text-light mx-2 me-5" href="admin.php?info=users">
                 <h5>Admin Panel</h5>
                 </a>
               </li>';
@@ -62,15 +65,15 @@ $companies = $manager->getAllCompanies();
               <img src="ICONS/shopping-cart.png" alt="purchasecard" width="30" height="30">
               <img id="reddot" class="mb-1" src="ICONS/red-dot.png" alt="purchasecard" width="7" height="7">
             </a>
-          <a href="../profile.php">
-            <img class="mt-1 ms-2" src="../ICONS/profile-user.png" alt="usericon" width="30" height="30" />
+          <a href="profile.php">
+            <img class="mt-1 ms-2" src="ICONS/profile-user.png" alt="usericon" width="30" height="30" />
           </a>
           <li class="nav-item mt-2">
             <div class="dropdown">
               <a class="dropdown-toggle text-light mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../PROCESS/logout.php">LogOut</a></li>
+                <li><a class="dropdown-item" href="PROCESS/logout.php">LogOut</a></li>
               </ul>
             </div>
           </li>';
@@ -82,24 +85,24 @@ $companies = $manager->getAllCompanies();
               <img src="ICONS/shopping-cart.png" alt="purchasecard" width="30" height="30">
               <img id="reddot" class="mb-1" src="ICONS/red-dot.png" alt="purchasecard" width="7" height="7">
             </a>
-      <a href="../profile.php">
-      <img class="mt-1 rounded-5 ms-2" src="../USER_PHOTOS/' . $_SESSION['image'] . '" alt="usericon" width="40" height="40" />
+      <a href="profile.php">
+      <img class="mt-1 rounded-5 ms-2" src="USER_PHOTOS/' . $_SESSION['image'] . '" alt="usericon" width="40" height="40" />
     </a>
     <li class="nav-item mt-2">
       <div class="dropdown">
         <a class="dropdown-toggle text-light mx-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="../PROCESS/logout.php">LogOut</a></li>
+          <li><a class="dropdown-item" href="PROCESS/logout.php">LogOut</a></li>
         </ul>
       </div>
     </li>';
           } else {
             echo '<li class="nav-item ">
-            <a class="nav-link text-light mx-2" href="../PHP/register.php">Sign Up</a>
+            <a class="nav-link text-light mx-2" href="PHP/register.php">Sign Up</a>
           </li>
           <li class="nav-item ">
-          <a href="../PHP/login.php" class="btn text-light rounded-0">Login</a>
+          <a href="PHP/login.php" class="btn text-light rounded-0">Login</a>
           </li>';
           }
           ?>
@@ -123,16 +126,16 @@ $companies = $manager->getAllCompanies();
         <!-- HIDDEN INPUT START -->
         <input class="searchinput w-75 rounded-1 font-italic" type="text" name="searchkey" placeholder=" Type a destination...">
         <button class="searchinputbtn bg-transparent border-0" type="submit">
-          <img class="mx-1" src="./ICONS/search.png" alt="loop" width="25" height="25">
+          <img class="mx-1" src="ICONS/search.png" alt="loop" width="25" height="25">
         </button>
-        <img class="closeup" src="./ICONS/left.png" alt="close" width="12" height="12">
+        <img class="closeup" src="ICONS/left.png" alt="close" width="12" height="12">
 
         <!-- HIDDEN INPUT END -->
 
         <!-- HEADER FOR DESTINATION WITH A LOOP TO EXPAND ONCLICK START -->
         <h3 class="destinations text-light mx-3">Destinations</h3>
         <a href="">
-          <img id="loop" class="mt-1" src="./ICONS/search.png" alt="loop" width="25" height="25">
+          <img id="loop" class="mt-1" src="ICONS/search.png" alt="loop" width="25" height="25">
         </a>
 
         <!-- HEADER FOR DESTINATION WITH A LOOP TO EXPAND ONCLICK END -->
@@ -156,9 +159,9 @@ $companies = $manager->getAllCompanies();
   foreach ($searchedDestinations as $searchedDestination): ?>
   
   <div id="card" class="card rounded-0 border-0 m-4" style="width: 17rem; height: 25rem">
-      <img class="rounded-0" src="../<?= $searchedDestination->getImage() ?>" class="card-img-top" alt="city">
+      <img class="rounded-0" src="<?= $searchedDestination->getImage() ?>" class="card-img-top" alt="city">
       <div class="card-body align-items-between">
-        <h4 class="card-title text-center my-2"> <span><img src="../<?= $searchedDestination->getFlag() ?> " alt="flag" width="30" height="30"> </span> <?= $searchedDestination->getLocation() ?> </h4>
+        <h4 class="card-title text-center my-2"> <span><img src="<?= $searchedDestination->getFlag() ?> " alt="flag" width="30" height="30"> </span> <?= $searchedDestination->getLocation() ?> </h4>
         <h6 class="text-center my-4"> <?= $searchedDestination->getCountry() ?> </h6>
         <div class="text-center d-flex justify-content-center text-secondary">
           <div class="startingprice text-secondary mx-3">
@@ -196,9 +199,9 @@ $companies = $manager->getAllCompanies();
 foreach ($destinations as $destination) : ?>
 
     <div id="card" class="card rounded-0 border-0 m-4" style="width: 17rem; height: 25rem">
-      <img class="rounded-0" src="../<?= $destination->getImage() ?>" class="card-img-top" alt="city">
+      <img class="rounded-0" src="<?= $destination->getImage() ?>" class="card-img-top" alt="city">
       <div class="card-body">
-        <h4 class="card-title text-center my-2"> <span><img src="../<?= $destination->getFlag() ?> " alt="flag" width="30" height="30"> </span> <?= $destination->getLocation() ?> </h4>
+        <h4 class="card-title text-center my-2"> <span><img src="<?= $destination->getFlag() ?> " alt="flag" width="30" height="30"> </span> <?= $destination->getLocation() ?> </h4>
         <h6 class="text-center my-4"> <?= $destination->getCountry() ?> </h6>
         <div class="text-center d-flex justify-content-center text-secondary">
           <div class="startingprice text-secondary mx-3">
@@ -221,7 +224,7 @@ foreach ($destinations as $destination) : ?>
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="generalLabel"><?= $destination->getLocation() ?></h1>
             <h3 class="fw-bold mx-4"><?= $destination->getCountry() ?></h3>
-            <img class="mb-1" src="../<?= $destination->getFlag() ?> " alt="flag" width="30" height="30">
+            <img class="mb-1" src="<?= $destination->getFlag() ?> " alt="flag" width="30" height="30">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -299,14 +302,14 @@ foreach ($destinations as $destination) : ?>
   <?php endforeach; }?>
 
       <!-- MORE BUTTON TO SHOW MORE -->
-      <a href="" style="text-decoration: none">
-        <div class="d-flex justify-content-end text-center mb-5 align-items-center">
-          <h4 class="text-light mx-2">More</h4>
-          <img class="morebtn mb-2" src="./ICONS/left.png" alt="close" width="15" height="15">
-
-        </div>
-      </a>
     </div>
+    <a href="" style="text-decoration: none">
+      <div class="d-flex justify-content-end text-center mb-5 align-items-center">
+        <h4 class="text-light mx-2">More</h4>
+        <img class="morebtn mb-2" src="./ICONS/left.png" alt="close" width="15" height="15">
+
+      </div>
+    </a>
 
   </div>
 </section>
@@ -451,7 +454,7 @@ foreach ($destinations as $destination) : ?>
 
 </section>
 <section id="footer" class="text-light text-center d-flex justify-content-center align-items-center">
-    Gueram  & Polo &copy 2023
+    Gueram &copy 2023
 </section>
 
 <!-- SECTION PARTNERS END -->

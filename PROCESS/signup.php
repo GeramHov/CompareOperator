@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			} else {
 				$query = $db->prepare("INSERT INTO users(firstname,lastname,email,password, created_at) VALUES (?,?,?,?, NOW())");
 				if ($query->execute(array($firstname, $lastname, $email, md5($password)))) {
-					header("location: ../index.php");
+					header("location: ../PHP/login.php");
 				}
 			}
 	} else {

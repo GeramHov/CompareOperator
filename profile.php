@@ -17,12 +17,16 @@ if(isset($_FILES['imgfile'])) {
 
 
 ?>
+    <link rel="stylesheet" href="SCSS/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </head>
+  <body>
 
 <section id="profile">
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid mx-5">
-    <a class="navbar-brand text-black" href="../index.php">
-        <img class="logo" src="../LOGO/logo.png" alt="Logo">
+    <a class="navbar-brand text-black" href="./index.php">
+        <img class="logo" src="./LOGO/logo.png" alt="Logo">
         <img class="logo logo-hover" src="./IMAGES/star.png" alt="Giant rock">
       </a>
     <button class="navbar-toggler text-black" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +58,7 @@ if(isset($_FILES['imgfile'])) {
   </div>
 </nav>
 <div class="container">
-            <div class="row vh-100">
+            <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
                         <div class="card-body text-center">
