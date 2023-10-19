@@ -1,0 +1,12 @@
+# CompareOperator
+![compare1](https://github.com/SaItiplouf/CompareOperator/assets/120452681/e4dc7b00-f3dd-4497-be13-f6a2b6f851f2)
+![compare2](https://github.com/SaItiplouf/CompareOperator/assets/120452681/2299c3ca-d1b9-425f-bb84-4aa6bcc11f80)
+![compare3](https://github.com/SaItiplouf/CompareOperator/assets/120452681/2ffd33ff-ed84-41c5-a6f2-047ae1be771e)
+![compare4](https://github.com/SaItiplouf/CompareOperator/assets/120452681/7f36d338-a7d1-4f51-8110-c587907b7c6e)
+![compare5](https://github.com/SaItiplouf/CompareOperator/assets/120452681/84de6f83-f582-48c8-bcfd-50ef42c35a57)
+![compare6](https://github.com/SaItiplouf/CompareOperator/assets/120452681/fcd13a90-13e2-4df7-b0bf-b72d68ba25eb)
+![compare7](https://github.com/SaItiplouf/CompareOperator/assets/120452681/3ed99cd7-27d7-4a8e-bc35-3bb637136216)
+![compare8](https://github.com/SaItiplouf/CompareOperator/assets/120452681/08a11fd6-e36b-44b6-82ce-897811a51a3f)
+![compare9](https://github.com/SaItiplouf/CompareOperator/assets/120452681/533d8de5-e401-4eeb-b617-1b7e547c37a4)
+![compare10](https://github.com/SaItiplouf/CompareOperator/assets/120452681/a619b909-a5ae-433b-a84c-ac9a15a3fb79)
+![compare11](https://github.com/SaItiplouf/CompareOperator/assets/120452681/e694e961-1b2b-44c4-a032-cbea4df62291)
